@@ -85,9 +85,8 @@ class Node(object):
                     else:
                         return self.pai.repeated(node)
         return True
-
+    #procurar na table as coords e a propria peca pelo ID
     def search_p(self, id_pec):
-        
         for x in range(TAMANHO["X"]):
             for y in range(TAMANHO["Y"]):
                 cel = self.table[x][y]
@@ -104,7 +103,7 @@ class Node(object):
         #tend em conta as restricoes do tamanho
 
         #procurar a peca
-        found = search_p(id_pec)        
+        found = self.search_p(id_pec)        
         if found is None:
             return None
 
@@ -145,7 +144,7 @@ class Node(object):
         #tend em conta as restricoes do tamanho
 
         #procurar a peca
-        found = search_p(id_pec)        
+        found = self.search_p(id_pec)        
         if found is None:
             return None
 
@@ -186,7 +185,7 @@ class Node(object):
         #tend em conta as restricoes do tamanho
 
         #procurar a peca
-        found = search_p(id_pec)        
+        found = self.search_p(id_pec)        
         if found is None:
             return None
 
@@ -227,7 +226,7 @@ class Node(object):
         #tend em conta as restricoes do tamanho
 
         #procurar a peca
-        found = search_p(id_pec)        
+        found = self.search_p(id_pec)        
         if found is None:
             return None
 
