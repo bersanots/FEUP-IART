@@ -1,4 +1,5 @@
 import copy
+import csv
 
 TAMANHO = {"X":4,"Y":5}
 
@@ -18,7 +19,7 @@ class Peca(object):
 
 class Celula(object):
     def __init__(self, tipo = None, peca = None):
-        self.tipo = tipo ## final= f ; fixa = fx ; parede = p ; normal = n
+        self.tipo = tipo ## final= f ; parede = p ; normal = n
         self.conteudo = peca ## = peca
 
 
@@ -31,7 +32,7 @@ class Node(object):
         self.oper = oper
 
         if tbl is None:
-            self.table = [ [Celula()]*TAMANHO["X"]]*TAMANHO["Y"]
+            self.table = [ [Celula()]*TAMANHO["Y"]]*TAMANHO["X"]
         else:
             self.table = tbl
         
@@ -262,8 +263,27 @@ class Node(object):
             return None
     
 
+def table_from_csv(file = 'default.csv'):
+    base_node = None
+    y = 0
+    with open(file, newline='') as csvfile:
+        reader = csv.reader(csvfile,delimiter=';')
+        for row in reader:
+            print('.;.'.join(row))
+            if(row[0] == 'd' and len(row) == 3):
+                TAMANHO["X"] = row[1]
+                TAMANHO["Y"] = row[2]
+                base_node = Node()
+
+            else if(row[0] == 'p' and len(row) == 4):
+                pass
+            else if(row[0] == 't' and len(row) == TAMANHO["X"]+1):
+                pass
     
+    return base_node
 
 
 
 
+
+ 
