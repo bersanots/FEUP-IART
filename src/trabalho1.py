@@ -15,12 +15,17 @@ class Peca(object):
             return False
 
         return self.id == other.id
+    
+    def __str__(self):
+        return "p=" + str(self.id) + ";"+ self.tipo
 
 
 class Celula(object):
     def __init__(self, tipo = None, peca = None):
         self.tipo = tipo ## final= f ; parede = p ; normal = n
         self.conteudo = peca ## = peca
+    def __str__(self):
+        return "c=" + self.tipo + ";" + (str(self.conteudo) if self.conteudo != None else "p=0;0")
 
 
 
@@ -30,9 +35,14 @@ class Node(object):
         self.pai = npai
         self.pecas = {}
         self.oper = oper
+        self.table = []
 
         if tbl is None:
-            self.table = [ [Celula()]*TAMANHO["Y"]]*TAMANHO["X"]
+            col = []
+            for y in range(TAMANHO["Y"]):
+                col+=[Celula()]
+            for x in range(TAMANHO["X"]):
+                self.table += [copy.deepcopy(col)]
         else:
             self.table = tbl
         
@@ -45,8 +55,14 @@ class Node(object):
 
     ## representasao string
     def __str__(self):
-        pass
-               
+        s = ""
+        for y in range(TAMANHO["Y"]):
+            for x in range(TAMANHO["X"]):
+                s += str(self.table[x][y]) + " | "
+            s += "\n"
+
+        return s
+
     ## path de node init ate ao actual
     def path(self):
         if self.pai is None:
@@ -195,8 +211,11 @@ class Node(object):
         if found["X"] > 0 and found["X"] - qty >= 0:
             # verificar que no espaco que ocupa no eixo dos YY tem possibilidade de subir a qty definida
             for x in range(qty):
+
                 for y in range(p.dimensao[1]):
-                    cel_test = self.table[found["X"] - x][found["Y"] + y]
+                    print(3)
+                    cel_test = self.table[found["X"] - x-1][found["Y"] + y]
+                    print(str(cel_test))
                     # desde que a celula não seja uma parede e estiver vazia, a peca pode se mover para la
                     if cel_test.conteudo != None or cel_test.tipo == "P":
                         return None
@@ -262,28 +281,69 @@ class Node(object):
         else:
             return None
     
-
-def table_from_csv(file = 'default.csv'):
+#d;4;5
+#p;2;3;1;n
+#t;n,2;n,2;n,2;n,0
+def node_from_csv(file = 'default.csv'):
     base_node = None
     y = 0
+    pieces = {}
     with open(file, newline='') as csvfile:
         reader = csv.reader(csvfile,delimiter=';')
         for row in reader:
-            print('.;.'.join(row))
+            #dims
             if(row[0] == 'd' and len(row) == 3):
-                TAMANHO["X"] = row[1]
-                TAMANHO["Y"] = row[2]
+                TAMANHO["X"] = int(row[1],base=10)
+                TAMANHO["Y"] = int(row[2],base=10)
                 base_node = Node()
+                pieces = base_node.pecas
+            #pecas
+            elif(row[0] == 'p' and len(row) == 5):
+                id = int(row[1],base=10)
+                dim = [int(row[2],base=10),int(row[3],base=10)]                
+                pieces[id] = Peca(id=id,dims=dim,tipo=row[4])
+            #linhas da matris
+            elif(row[0] == 't' and len(row) == TAMANHO["X"]+1):
+                for i in range(TAMANHO["X"]):
+                    c = row[i+1].split(",")
+                    base_node.table[i][y].tipo = c[0]
+                    id = int(c[1],base=10)
+                    if id != 0:
+                        base_node.table[i][y].conteudo = pieces[id]
+                y+=1
 
-            else if(row[0] == 'p' and len(row) == 4):
-                pass
-            else if(row[0] == 't' and len(row) == TAMANHO["X"]+1):
-                pass
     
     return base_node
 
-
-
-
-
+bnode = node_from_csv()
+while True:
+    print(str(bnode))
+    print("move")
+    id = int(input("id? "),10)
+    direction = input("direction?(wasd) ")
+    
+    if direction == "a":
+        n = bnode.move_left(id,1)
+        if n == None:
+            print("invalid move")
+        else:
+            bnode = n
+    elif direction == "d":
+        n = bnode.move_right(id,1)
+        if n == None:
+            print("invalid move")
+        else:
+            bnode = n
+    elif direction == "w":
+        n = bnode.move_up(id,1)
+        if n == None:
+            print("invalid move")
+        else:
+            bnode = n
+    elif direction == "s":
+        n = bnode.move_down(id,1)
+        if n == None:
+            print("invalid move")
+        else:
+            bnode = n
  
