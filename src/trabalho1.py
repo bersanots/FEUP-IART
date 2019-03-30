@@ -1,3 +1,5 @@
+# -*- coding: UTF-8
+
 import copy
 import csv
 
@@ -130,7 +132,7 @@ class Node(object):
             # verificar que no espaco que ocupa no eixo dos XX tem possibilidade de subir a qty definida
             for x in range(p.dimensao[0]):
                 for y in range(qty):
-                    cel_test = self.table[found["X"] + x][found["Y"] - y]
+                    cel_test = self.table[found["X"] + x][found["Y"] - y - 1]
                     # desde que a celula não seja uma parede e estiver vazia, a peca pode se mover para la
                     if cel_test.conteudo != None or cel_test.tipo == "P":
                         return None
@@ -254,8 +256,8 @@ class Node(object):
 
         if found["X"] + p.dimensao[0] < TAMANHO["X"] and found["X"] + p.dimensao[0] + qty <=  TAMANHO["X"]:
             # verificar que no espaco que ocupa no eixo dos XX tem possibilidade de descer a qty definida
-            for x in range(p.dimensao[0]):
-                for y in range(qty):
+            for x in range(qty):
+                for y in range(p.dimensao[1]):
                     cel_test = self.table[found["X"] + p.dimensao[0] + x][found["Y"] + y]
                     # desde que a celula não seja uma parede e estiver vazia, a peca pode se mover para la
                     if cel_test.conteudo != None or cel_test.tipo == "P":
