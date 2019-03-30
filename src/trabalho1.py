@@ -348,4 +348,8 @@ while True:
             print("invalid move")
         else:
             bnode = n
+    
+    if  bnode.terminal():
+        print("CONGRATULATIONS YOU WON!!")
+        break
  
