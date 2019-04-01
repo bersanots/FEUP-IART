@@ -317,6 +317,25 @@ def node_from_csv(file = 'default.csv'):
     
     return base_node
 
+
+## Começa Aqui o Programa em Execução
+print("")
+print("###########################################")
+print("############# KLOTSKI FOR IART ############")
+print("###########################################")
+print("")
+print("")
+print("Bem-vindo ao Programa de resolução do puzzle Klostski!")
+print("")
+print("Por favor selecione uma das seguintes opções:")
+print("1 - Resolver manualmente o puzzle.")
+print("2 - Resolver através de uma pesquisa em largura.")
+print("3 - Resolver através de uma pesquisa primeiro em profundidade (Depth-first search).")
+print("4 - Resolver através de uma pesquisa em profundidade iterativa.")
+print("")
+
+
+
 bnode = node_from_csv()
 while True:
     print(str(bnode))
