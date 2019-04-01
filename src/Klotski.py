@@ -2,6 +2,7 @@
 
 import copy
 import csv
+from bot import * 
 
 TAMANHO = {"X":4,"Y":5}
 
@@ -31,7 +32,7 @@ class Celula(object):
 
 
 
-class Node(object):
+class No(object):
 
     def __init__(self, npai = None, tbl = None, oper = None):
         self.pai = npai
@@ -55,7 +56,7 @@ class Node(object):
                 if p != None:
                     self.pecas[p.id] = p
 
-    ## representasao string
+    ## representacao string
     def __str__(self):
         s = ""
         for y in range(TAMANHO["Y"]):
@@ -152,7 +153,7 @@ class Node(object):
                 for y in range(p.dimensao[1]):
                     new_table[x+found["X"]][y+found["Y"] - qty].conteudo = p
 
-            return Node(self,new_table,"move_up")
+            return No(self,new_table,"move_up")
 
         else:
             return None
@@ -193,7 +194,7 @@ class Node(object):
                 for y in range(p.dimensao[1]):
                     new_table[x+found["X"]][y+found["Y"] + qty].conteudo = p
 
-            return Node(self,new_table,"move_down")
+            return No(self,new_table,"move_down")
 
         else:
             return None
@@ -237,7 +238,7 @@ class Node(object):
                 for y in range(p.dimensao[1]):
                     new_table[x+found["X"] - qty][y+found["Y"]].conteudo = p
 
-            return Node(self,new_table,"move_left")
+            return No(self,new_table,"move_left")
 
         else:
             return None
@@ -245,7 +246,7 @@ class Node(object):
 
     def move_right(self, id_pec, qty):
         #verificar se na tabela a peca com o id_pec pode mover para direita 
-        #tend em conta as restricoes do tamanho
+        #tendo em conta as restricoes do tamanho
 
         #procurar a peca
         found = self.search_p(id_pec)        
@@ -278,7 +279,7 @@ class Node(object):
                 for y in range(p.dimensao[1]):
                     new_table[x+found["X"] + qty][y+found["Y"]].conteudo = p
 
-            return Node(self,new_table,"move_right")
+            return No(self,new_table,"move_right")
 
         else:
             return None
@@ -297,14 +298,14 @@ def node_from_csv(file = 'default.csv'):
             if(row[0] == 'd' and len(row) == 3):
                 TAMANHO["X"] = int(row[1],base=10)
                 TAMANHO["Y"] = int(row[2],base=10)
-                base_node = Node()
+                base_node = No()
                 pieces = base_node.pecas
             #pecas
             elif(row[0] == 'p' and len(row) == 5):
                 id = int(row[1],base=10)
                 dim = [int(row[2],base=10),int(row[3],base=10)]                
                 pieces[id] = Peca(id=id,dims=dim,tipo=row[4])
-            #linhas da matris
+            #linhas da matriz
             elif(row[0] == 't' and len(row) == TAMANHO["X"]+1):
                 for i in range(TAMANHO["X"]):
                     c = row[i+1].split(",")
@@ -318,6 +319,44 @@ def node_from_csv(file = 'default.csv'):
     return base_node
 
 
+def init():
+    bnode = node_from_csv()
+    while True:
+        print(str(bnode))
+        print("move")
+        id = int(input("id? "),10)
+        direction = input("direction?(wasd) ")
+        
+        if direction == "a":
+            n = bnode.move_left(id,1)
+            if n == None:
+                print("invalid move")
+            else:
+                bnode = n
+        elif direction == "d":
+            n = bnode.move_right(id,1)
+            if n == None:
+                print("invalid move")
+            else:
+                bnode = n
+        elif direction == "w":
+            n = bnode.move_up(id,1)
+            if n == None:
+                print("invalid move")
+            else:
+                bnode = n
+        elif direction == "s":
+            n = bnode.move_down(id,1)
+            if n == None:
+                print("invalid move")
+            else:
+                bnode = n
+        
+        if  bnode.terminal():
+            print("CONGRATULATIONS YOU WON!!")
+            break
+    
+
 ## Começa Aqui o Programa em Execução
 print("")
 print("###########################################")
@@ -325,50 +364,46 @@ print("############# KLOTSKI FOR IART ############")
 print("###########################################")
 print("")
 print("")
-print("Bem-vindo ao Programa de resolução do puzzle Klostski!")
+print("Bem-vindo ao Programa de resolução do puzzle Klotski!")
 print("")
 print("Por favor selecione uma das seguintes opções:")
 print("1 - Resolver manualmente o puzzle.")
 print("2 - Resolver através de uma pesquisa em largura.")
-print("3 - Resolver através de uma pesquisa primeiro em profundidade (Depth-first search).")
-print("4 - Resolver através de uma pesquisa em profundidade iterativa.")
+print("3 - Resolver através de uma pesquisa em profundidade.")
+print("4 - Resolver através de uma pesquisa com aprofundamento progressivo.")
+print("5 - Resolver através de uma pesquisa gulosa.")
+print("6 - Resolver através de uma pesquisa com Algoritmo A*.")
 print("")
+mode = int(input('Escolha uma opção: '))
 
+if mode == 1:
+    init()
+else:
+    node = node_from_csv()
+    board = node.table
+    pieces = node.pecas
+    goal_index = None
+    state = [None] * 20                           #put in format for the Klotski solver
+    for column in board:
+        for cell in column:
+            if cell.tipo == 'f' and goal_index == None:
+                goal_index = 4 * column.index(cell) + board.index(column)
+            if cell.conteudo == None:
+                state[4 * column.index(cell) + board.index(column)] = 0
+            else:
+                state[4 * column.index(cell) + board.index(column)] = cell.conteudo.id
+    puzzle = Klotski(tuple(state),goal_index)
 
+    print(str(node))
+    print("Resolvendo...")
 
-bnode = node_from_csv()
-while True:
-    print(str(bnode))
-    print("move")
-    id = int(input("id? "),10)
-    direction = input("direction?(wasd) ")
-    
-    if direction == "a":
-        n = bnode.move_left(id,1)
-        if n == None:
-            print("invalid move")
-        else:
-            bnode = n
-    elif direction == "d":
-        n = bnode.move_right(id,1)
-        if n == None:
-            print("invalid move")
-        else:
-            bnode = n
-    elif direction == "w":
-        n = bnode.move_up(id,1)
-        if n == None:
-            print("invalid move")
-        else:
-            bnode = n
-    elif direction == "s":
-        n = bnode.move_down(id,1)
-        if n == None:
-            print("invalid move")
-        else:
-            bnode = n
-    
-    if  bnode.terminal():
-        print("CONGRATULATIONS YOU WON!!")
-        break
- 
+    if mode == 2:
+        print("bfs: " + str(breadth_first_graph_search(puzzle).solution()))
+    elif mode == 3:
+        print("dfs: " + str(depth_first_graph_search(puzzle).solution()))
+    elif mode == 4:
+        print("iterative: " + str(iterative_deepening_search(puzzle).solution()))
+    elif mode == 5:
+        print("greedy: " + str(greedy_best_first_graph_search(puzzle,lambda n: n.path_cost + heuristic(n,goal_index)).solution()))
+    elif mode == 6:
+        print("A*: " + str(astar_search(puzzle).solution()))
