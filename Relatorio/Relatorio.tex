@@ -48,47 +48,94 @@ Inteligência Artificial, Pesquisa, Algoritmo A*, Klotski
 \end{IEEEkeywords}
 
 \section{Introdução}
-Neste trabalho abordar-se-ão diversos métodos de pesquisa em Python aplicados à resolução de puzzles de blocos conhecidos pelo nome “Klotski”, mas mais especificamente a iteração deste que está presente na Google Play Store **INSERIR REFERENCIA** Discutir-se-á a história do jogo, as suas regras e a formulação formal do problema. Também falar-se-á dos diferentes métodos de pesquisa, da sua implementação em Python e a eficiência dos mesmos para o jogo em questão. 
+Neste trabalho abordar-se-ão diversos métodos de pesquisa em Python aplicados à resolução de puzzles de blocos conhecidos pelo nome “Klotski”, mas mais especificamente a iteração deste que está presente na Google Play Store \cite{b1} Discutir-se-á a história do jogo, as suas regras e a formulação formal do problema. Também falar-se-á dos diferentes métodos de pesquisa, da sua implementação em Python e a eficiência dos mesmos para o jogo em questão. 
 
 \section{Descrição do Problema}
-Os puzzles Klotski são puzzles de movimento de blocos em que o objetivo é mover um bloco específico para um sítio específico, movendo todas as outras peças nesse processo. Na Figura 1 pode-se ver um exemplo de um puzzle.
+Os puzzles Klotski são puzzles de movimento de blocos em que o objetivo é mover um bloco específico para um sítio específico, movendo todas as outras peças nesse processo. Na Figura \ref{fig:klotski1} pode-se ver um exemplo de um puzzle.
 
-INSERIR IMAGEM
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\linewidth]{klotski1.png}
+	\caption{Puzzle básico de Klotski, sendo o bloco vermelho aquele que tem de ir para um local específico (pontos vermelhos)}
+	\label{fig:klotski1}
+\end{figure}
 
-A origem deste puzzle é ainda incerta, mas pensa-se que uma primeira iteração do mesmo tenha sido patenteada por Henry Walton em 1893, embora existam diversos países (Inglaterra, Japão) que reclamam a autoria do puzzle “Original”, sendo que ainda hoje é desconhecida (ou não existe consenso) quanto à origem do mesmo. [2]
-A variante aqui estudada é a iteração presente na Google Play Store [1] que acrescenta regras como blocos que não se podem mover (i.e. paredes) e outros blocos azuis que se portam como paredes até que o bloco vermelho toque em todos eles, fazendo-os desaparecer. Na Figura 2 pode-se ver um exemplo de um puzzle que contém paredes (representadas por blocos castanhos) e os já mencionados blocos azuis.
+A origem deste puzzle é ainda incerta, mas pensa-se que uma primeira iteração do mesmo tenha sido patenteada por Henry Walton em 1893, embora existam diversos países (Inglaterra, Japão) que reclamam a autoria do puzzle “Original”, sendo que ainda hoje é desconhecida (ou não existe consenso) quanto à origem do mesmo. \cite{b2}
+A variante aqui estudada é a iteração presente na Google Play Store \cite{b1} que acrescenta regras como blocos que não se podem mover (i.e. paredes) e outros blocos azuis que se portam como paredes até que o bloco vermelho toque em todos eles, fazendo-os desaparecer. Na Figura \ref{fig:klotski2} pode-se ver um exemplo de um puzzle que contém paredes (representadas por blocos castanhos) e os já mencionados blocos azuis.
 
 
-INSERIR IMAGEM
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\linewidth]{klotski2.png}
+	\caption{Puzzle de Klotski com paredes (representado com blocos castanhos) e com blocos azuis.}
+	\label{fig:klotski2}
+\end{figure}
 
 
 
 \section{Formulação do Problema}
-Representação do Estado: O estado é representado por uma Matriz de tamanho variável (a * b) [0 – espaço livre], pela posição da forma geométrica vermelha - [2] -, pelo local das marcas vermelhas - [1] -, pelas outras peças móveis (cada uma terá um número associado para as distinguir entre si, exceto aqueles números já reservados para outras peças), pelos locais das paredes fixas (caso estas existam - [X]) e pelos locais das paredes azuis que desaparecem depois da peça vermelha entrar em contacto com todas elas - [Y].
-Estados Iniciais: Os estados iniciais variam conforme o puzzle a ser resolvido. Na Figura 1 e na Figura 2 podem-se ver dois exemplos de estados iniciais de dois puzzles distintos.
+\textbf{Representação do Estado:} O estado é representado por uma Matriz de tamanho variável (a * b) [0 – espaço livre], e pela posição das diferentes peças que são numeradas (1, 2, 3, etc.). 
+Tanto as células do puzzle como os as diferentes peças, têm uma característica extra: n- normal; f-final. No caso das células estes representam as células normais do jogo enquanto as células finais representam os sítios onde se devem encontrar as peças finais. No caso das diferentes peças, as peças normais representam as peças móveis que se conhecem, e a peça final é aquela cujo objetivo é levar à(s) célula(s) final(ais).
 
-Teste Objetivo: O bloco vermelho estar na posição final (no local das pequenas marcas vermelhas) e chegar lá no número mínimo de jogadas possível.
-Operadores/Jogadas: Mov(N,M,E) – Movimentação da peça N (sendo N um número acima de 2 mas igual ou inferior ao número mais alto), M casas no eixo E (x ou y).
-Pré-condições: todos os elementos da peça possam mover-se na direção desejada:
-• Quando Mov(a,-3,y) para todos os elementos de a[x][y], nas 3 casas inferiores [y-1][y-2][y-3] o elemento presente terá de ser (a,0,1).
-Efeitos: Mov(a,-3,y) – todas as células da matriz com valor ‘a’, passarão das coordenadas a[x][y] para a[x][y-3]
+\textbf{Estados Iniciais:} Os estados iniciais variam conforme o puzzle a ser resolvido. Na Figura 1 pode-se ver um exemplos de uma representação gráfica de um estado inicial de um puzzle. Na Figura 3 pode-se ver uma representação desse mesmo puzzle num terminal.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\linewidth]{klotski3.png}
+	\caption{Puzzle de Klotski: Representação no terminal}
+	\label{fig:klotski3}
+\end{figure}
+
+\textbf{Teste Objetivo:} A peça final deverá chegar à localização das células finais e chegar lá no número mínimo de jogadas possível.
+
+\textbf{Operadores/Jogadas:} Mov(N,D) – Movimentação da peça N (sendo N um número acima de 1 mas igual ou inferior ao número mais alto),na direcção D (Cima, Baixo, Esquerda ou direita).
+
+\textbf{Pré-condições:} Uma peça possa mover-se na direção desejada, i.e. ter espaço livre para todos os elementos da peça se poderem mover na direção desejada.
+
+\textbf{Efeitos:} Mov(1, Cima) – A peça 1 move-se (se possível) uma casa para cima.
 
 
 
 \section{Trabalho Relacionado}
-Foram encontradas diversas implementações em Python do puzzle Klotski, algumas com solvers já implementados [3] [4] [5] [6] [7]. A implementação do Klotski será baseada nestas mesmas fontes, sendo que serão realizadas diversas adaptações ao caso específico deste trabalho.
-Os métodos de pesquisa utilizados serão pesquisa em largura, pesquisa em profundidade, aprofundamento progressivo, custo uniforme, pesquisa gulosa e Algoritmo A*, sendo a implementação destes métodos baseados naqueles presentes no livro “Artificial Intelligence: A Modern Approach” (sendo este o livro principal da cadeira de Inteligência Artificial) [8], sendo que o código (em várias linguagens) para a implementação destes algoritmos está disponível online [9].
+Foram encontradas diversas implementações em Python do puzzle Klotski, algumas com solvers já implementados \cite{b3} \cite{b4} \cite{b5} \cite{b6} \cite{b7}. A implementação do Klotski será baseada nestas mesmas fontes, sendo que serão realizadas diversas adaptações ao caso específico deste trabalho.
+Os métodos de pesquisa utilizados serão pesquisa em largura, pesquisa em profundidade, aprofundamento progressivo, custo uniforme, pesquisa gulosa e Algoritmo A*, sendo a implementação destes métodos baseados naqueles presentes no livro “Artificial Intelligence: A Modern Approach” (sendo este o livro principal da cadeira de Inteligência Artificial) \cite{b8}, sendo que o código (em várias linguagens) para a implementação destes algoritmos está disponível online \cite{b9}.
 
 \section{Implementação do Jogo}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Como foi referido anteriormente, foram encontradas diversas implementações do jogo realizadas por diversas pessoas diferentes, no entanto a implementação do jogo que foi utilizada foi uma criada de raíz, sendo que as outras implementações encontradas serviram apenas como elemento de consulta quando necessário.
+O Programa utiliza ficheiros csv como meio para "receber" o estado do puzzle, seu tamanho, localização das diferentes peças e local final (onde deve ficar a peça objetivo).
+Tendo o estado do puzzle e o seu objetivo final, são aplicados os diferentes métodos de pesquisa para saber quais os passos necessários para chegar ao estado final no menor tempo possível.
+
 
 \section{Algoritmos de Pesquisa}
+Foram implementados os diferentes algoritmos de pesquisa para proceder à resolução deste puzzle. Os algoritmos implementados foram: Pesquisa Primeiro em Largura ("Breadth-First Search"), Pesquisa de Custo Uniforme, Pesquisa Primeiro em Profundidade ("Depth-First Search"), Pesquisa em Profundidade Iterativa, Pesquisa Gulosa ("Greedy Search") e Pesquisa A*. Para implementar estes diferentes algoritmos no nosso jogo, foi adaptado a lógica de jogo aos algoritmos do livro \cite{b8}, sendo que o código desses mesmos algoritmos é o mesmo presente no GitHub do livro \cite{b9}.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
 \section{Experiências e Resultados}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Realizaram-se diversas experiências, comparando o desempenho dos diferentes algoritmos na resolução dum puzzle Klotski. Na tabela seguinte pode-se ver a comparação dos diferentes métodos de resolução
+
+\begin{table}[htbp]
+\caption{Comparação dos diferentes métodos de pesquisa}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Método de pesquisa} & \textbf{Tempo (segundos)} & \textbf{Número de nós)} \\
+\hline
+ Pesquisa Primeiro em Largura & 23 & 45\\
+ Pesquisa de Custo Uniforme & 23 & 45 \\
+ Pesquisa Primeiro em Profundidade & 23 & 45\\
+ Pesquisa em Profundidade Iterativa & 23 & 45\\
+ Pesquisa Gulosa & 23 & 45\\ 
+ Pesquisa A* & 23 & 45\\
+\hline
+
+\end{tabular}
+\label{tab1}
+\end{center}
+\end{table}
+
+
 \section{Conclusões e Perspetivas de Desenvolvimento}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Como se pode verificar na secção anterior, e tal como seria teoricamente esperado, o método A* foi aquele que mostrou ser o mais eficaz na resolução do puzzle klotski. Infelizmente ainda não foi possível implementar certas regras de jogo que são específicas em relação ao que existe na Google Play Store.
 
 
 
@@ -98,36 +145,21 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 \section*{Referências Bibliográficas}
 
 
-Please number citations consecutively within brackets \cite{b1}. The 
-sentence punctuation follows the bracket \cite{b2}. Refer simply to the reference 
-number, as in \cite{b3}---do not use ``Ref. \cite{b3}'' or ``reference \cite{b3}'' except at 
-the beginning of a sentence: ``Reference \cite{b3} was the first $\ldots$''
-
-Number footnotes separately in superscripts. Place the actual footnote at 
-the bottom of the column in which it was cited. Do not put footnotes in the 
-abstract or reference list. Use letters for table footnotes.
-
-Unless there are six authors or more give all authors' names; do not use 
-``et al.''. Papers that have not been published, even if they have been 
-submitted for publication, should be cited as ``unpublished'' \cite{b4}. Papers 
-that have been accepted for publication should be cited as ``in press'' \cite{b5}. 
-Capitalize only the first word in a paper title, except for proper nouns and 
-element symbols.
-
-For papers published in translation journals, please give the English 
-citation first, followed by the original foreign-language citation \cite{b6}.
 
 \begin{thebibliography}{00}
-\bibitem{b1} G. Eason, B. Noble, and I. N. Sneddon, ``On certain integrals of Lipschitz-Hankel type involving products of Bessel functions,'' Phil. Trans. Roy. Soc. London, vol. A247, pp. 529--551, April 1955.
-\bibitem{b2} J. Clerk Maxwell, A Treatise on Electricity and Magnetism, 3rd ed., vol. 2. Oxford: Clarendon, 1892, pp.68--73.
-\bibitem{b3} I. S. Jacobs and C. P. Bean, ``Fine particles, thin films and exchange anisotropy,'' in Magnetism, vol. III, G. T. Rado and H. Suhl, Eds. New York: Academic, 1963, pp. 271--350.
-\bibitem{b4} K. Elissa, ``Title of paper if known,'' unpublished.
-\bibitem{b5} R. Nicole, ``Title of paper with only first word capitalized,'' J. Name Stand. Abbrev., in press.
-\bibitem{b6} Y. Yorozu, M. Hirano, K. Oka, and Y. Tagawa, ``Electron spectroscopy studies on magneto-optical media and plastic substrate interface,'' IEEE Transl. J. Magn. Japan, vol. 2, pp. 740--741, August 1987 [Digests 9th Annual Conf. Magnetics Japan, p. 301, 1982].
-\bibitem{b7} M. Young, The Technical Writer's Handbook. Mill Valley, CA: University Science, 1989.
+\bibitem{b1} “Klotski - Aplicações no Google Play,” [Online]. Available: https://play.google.com/store/apps/details?id=com.alcamasoft.juegos.klotski.android. [Acedido em 15 03 2019].
+\bibitem{b2} “Klotski - Wikipedia,” [Online]. Available: https://en.wikipedia.org/wiki/Klotski. [Acedido em 06 03 2019].
+\bibitem{b3} Goshuujin, “Github - Goshuujin/Klotski,” [Online]. Available: https://github.com/Goshuujin/Klotski. [Acedido em 16 03 2019].
+\bibitem{b4} SamuelDSR, “Github - SamuelDSR/Klotski-python,” [Online]. Available: https://github.com/SamuelDSR/Klotski-python. [Acedido em 16 03 2019].
+\bibitem{b5} aschmied, “Github - aschmied/klotski-solver,” [Online]. Available: https://github.com/aschmied/klotski-solver. [Acedido em 16 03 2019].
+\bibitem{b6} jwmullally, “Github - jwmullally/klotski\_solver,” [Online]. Available: https://github.com/jwmullally/klotski\_solver. [Acedido em 16 03 2019].
+\bibitem{b7} D. R. Ying Dang, “Github,” [Online]. Available: https://github.com/whydang/klotski.
+\bibitem{b8}  S. Russel e P. Norvig, Artificial Intelligence: A Modern Approach, Pearson Education Inc., 2010.
+\bibitem{b9} S. Russel e P. Norvig, “AimaCode - Code for the Book Artificial Inteligence: A Modern Approach",” 2019. [Online]. Available: https://github.com/aimacode. [Acedido em Março 2019].
+
+
 \end{thebibliography}
 \vspace{12pt}
 \color{red}
-IEEE conference templates contain guidance text for composing and formatting conference papers. Please ensure that all template text is removed from your conference paper prior to submission to the conference. Failure to remove the template text from your paper may result in your paper not being published.
 
 \end{document}

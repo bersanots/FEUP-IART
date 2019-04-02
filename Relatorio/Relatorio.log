@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.3.28)  28 MAR 2019 12:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.6960 64-bit) (preloaded format=pdflatex 2019.4.2)  2 APR 2019 18:40
 entering extended mode
 **./Relatorio.tex
 (Relatorio.tex
@@ -16,7 +16,7 @@ Document Class: IEEEtran 2015/08/26 V1.8b by Michael Shell
 \@IEEEtrantmptoksA=\toks14
 LaTeX Font Info:    Try loading font information for OT1+ptm on input line 503.
 
-("C:\Programs\MiKTeX 2.9\tex/latex/psnfss\ot1ptm.fd"
+("E:\Programs\MiKTeX 2.9\tex/latex/psnfss\ot1ptm.fd"
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 -- Using 8.5in x 11in (letter) paper.
@@ -112,29 +112,29 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <24> not available
 \@IEEEtranrubishbin=\box28
 )
 ** ATTENTION: Overriding command lockouts (line 2).
-("C:\Programs\MiKTeX 2.9\tex/latex/cite\cite.sty"
+("E:\Programs\MiKTeX 2.9\tex/latex/cite\cite.sty"
 LaTeX Info: Redefining \cite on input line 302.
 LaTeX Info: Redefining \nocite on input line 332.
 Package: cite 2015/02/27  v 5.5
 )
-("C:\Programs\MiKTeX 2.9\tex/latex/amsmath\amsmath.sty"
+("E:\Programs\MiKTeX 2.9\tex/latex/amsmath\amsmath.sty"
 Package: amsmath 2018/12/01 v2.17b AMS math features
 \@mathmargin=\skip44
 
 For additional information on amsmath, use the `?' option.
-("C:\Programs\MiKTeX 2.9\tex/latex/amsmath\amstext.sty"
+("E:\Programs\MiKTeX 2.9\tex/latex/amsmath\amstext.sty"
 Package: amstext 2000/06/29 v2.01 AMS text
 
-("C:\Programs\MiKTeX 2.9\tex/latex/amsmath\amsgen.sty"
+("E:\Programs\MiKTeX 2.9\tex/latex/amsmath\amsgen.sty"
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks15
 \ex@=\dimen126
 ))
-("C:\Programs\MiKTeX 2.9\tex/latex/amsmath\amsbsy.sty"
+("E:\Programs\MiKTeX 2.9\tex/latex/amsmath\amsbsy.sty"
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen127
 )
-("C:\Programs\MiKTeX 2.9\tex/latex/amsmath\amsopn.sty"
+("E:\Programs\MiKTeX 2.9\tex/latex/amsmath\amsopn.sty"
 Package: amsopn 2016/03/08 v2.02 operator names
 )
 \inf@bad=\count95
@@ -175,23 +175,23 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 730.
 LaTeX Info: Redefining \[ on input line 2844.
 LaTeX Info: Redefining \] on input line 2845.
 )
-("C:\Programs\MiKTeX 2.9\tex/latex/amsfonts\amssymb.sty"
+("E:\Programs\MiKTeX 2.9\tex/latex/amsfonts\amssymb.sty"
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 
-("C:\Programs\MiKTeX 2.9\tex/latex/amsfonts\amsfonts.sty"
+("E:\Programs\MiKTeX 2.9\tex/latex/amsfonts\amsfonts.sty"
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
-("C:\Programs\MiKTeX 2.9\tex/latex/algorithms\algorithmic.sty"
+("E:\Programs\MiKTeX 2.9\tex/latex/algorithms\algorithmic.sty"
 Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
 
-("C:\Programs\MiKTeX 2.9\tex/latex/base\ifthen.sty"
+("E:\Programs\MiKTeX 2.9\tex/latex/base\ifthen.sty"
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
-("C:\Programs\MiKTeX 2.9\tex/latex/graphics\keyval.sty"
+("E:\Programs\MiKTeX 2.9\tex/latex/graphics\keyval.sty"
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks20
 )
@@ -202,27 +202,27 @@ Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \ALC@tlm=\skip47
 \algorithmicindent=\skip48
 )
-("C:\Programs\MiKTeX 2.9\tex/latex/graphics\graphicx.sty"
+("E:\Programs\MiKTeX 2.9\tex/latex/graphics\graphicx.sty"
 Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
 
-("C:\Programs\MiKTeX 2.9\tex/latex/graphics\graphics.sty"
+("E:\Programs\MiKTeX 2.9\tex/latex/graphics\graphics.sty"
 Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
 
-("C:\Programs\MiKTeX 2.9\tex/latex/graphics\trig.sty"
+("E:\Programs\MiKTeX 2.9\tex/latex/graphics\trig.sty"
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 )
-("C:\Programs\MiKTeX 2.9\tex/latex/graphics-cfg\graphics.cfg"
+("E:\Programs\MiKTeX 2.9\tex/latex/graphics-cfg\graphics.cfg"
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 99.
 
-("C:\Programs\MiKTeX 2.9\tex/latex/graphics-def\pdftex.def"
+("E:\Programs\MiKTeX 2.9\tex/latex/graphics-def\pdftex.def"
 File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen135
 \Gin@req@width=\dimen136
 )
-("C:\Programs\MiKTeX 2.9\tex/latex/base\textcomp.sty"
+("E:\Programs\MiKTeX 2.9\tex/latex/base\textcomp.sty"
 Package: textcomp 2018/08/11 v2.0j Standard LaTeX package
 Package textcomp Info: Sub-encoding information:
 (textcomp)               5 = only ISO-Adobe without \textcurrency
@@ -237,12 +237,12 @@ Package textcomp Info: Sub-encoding information:
 (textcomp)             See the documentation for details.
 Package textcomp Info: Setting ? sub-encoding to TS1/1 on input line 79.
 
-("C:\Programs\MiKTeX 2.9\tex/latex/base\ts1enc.def"
+("E:\Programs\MiKTeX 2.9\tex/latex/base\ts1enc.def"
 File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
 Now handling font encoding TS1 ...
 ... processing UTF-8 mapping file for font encoding TS1
 
-("C:\Programs\MiKTeX 2.9\tex/latex/base\ts1enc.dfu"
+("E:\Programs\MiKTeX 2.9\tex/latex/base\ts1enc.dfu"
 File: ts1enc.dfu 2018/10/05 v1.2f UTF-8 support for inputenc
    defining Unicode char U+00A2 (decimal 162)
    defining Unicode char U+00A3 (decimal 163)
@@ -379,10 +379,10 @@ Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 407.
 Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 408.
 Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 409.
 )
-("C:\Programs\MiKTeX 2.9\tex/latex/xcolor\xcolor.sty"
+("E:\Programs\MiKTeX 2.9\tex/latex/xcolor\xcolor.sty"
 Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
 
-("C:\Programs\MiKTeX 2.9\tex/latex/graphics-cfg\color.cfg"
+("E:\Programs\MiKTeX 2.9\tex/latex/graphics-cfg\color.cfg"
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: pdftex.def on input line 225.
@@ -413,13 +413,13 @@ LaTeX Font Info:    ... okay on input line 12.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 12.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 12.
 
-("C:\Programs\MiKTeX 2.9\tex/latex/base\ts1cmr.fd"
+("E:\Programs\MiKTeX 2.9\tex/latex/base\ts1cmr.fd"
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 12.
 
 -- Lines per column: 56 (exact).
-("C:\Programs\MiKTeX 2.9\tex/context/base/mkii\supp-pdf.mkii"
+("E:\Programs\MiKTeX 2.9\tex/context/base/mkii\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count111
 \scratchdimen=\dimen137
@@ -432,39 +432,39 @@ LaTeX Font Info:    ... okay on input line 12.
 \MPnumerator=\count115
 \makeMPintoPDFobject=\count116
 \everyMPtoPDFconversion=\toks22
-) ("C:\Programs\MiKTeX 2.9\tex/latex/oberdiek\epstopdf-base.sty"
+) ("E:\Programs\MiKTeX 2.9\tex/latex/oberdiek\epstopdf-base.sty"
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
-("C:\Programs\MiKTeX 2.9\tex/generic/oberdiek\infwarerr.sty"
+("E:\Programs\MiKTeX 2.9\tex/generic/oberdiek\infwarerr.sty"
 Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
 )
-("C:\Programs\MiKTeX 2.9\tex/latex/oberdiek\grfext.sty"
+("E:\Programs\MiKTeX 2.9\tex/latex/oberdiek\grfext.sty"
 Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
 
-("C:\Programs\MiKTeX 2.9\tex/generic/oberdiek\kvdefinekeys.sty"
+("E:\Programs\MiKTeX 2.9\tex/generic/oberdiek\kvdefinekeys.sty"
 Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
 
-("C:\Programs\MiKTeX 2.9\tex/generic/oberdiek\ltxcmds.sty"
+("E:\Programs\MiKTeX 2.9\tex/generic/oberdiek\ltxcmds.sty"
 Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
 )))
-("C:\Programs\MiKTeX 2.9\tex/latex/oberdiek\kvoptions.sty"
+("E:\Programs\MiKTeX 2.9\tex/latex/oberdiek\kvoptions.sty"
 Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
 
-("C:\Programs\MiKTeX 2.9\tex/generic/oberdiek\kvsetkeys.sty"
+("E:\Programs\MiKTeX 2.9\tex/generic/oberdiek\kvsetkeys.sty"
 Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
 
-("C:\Programs\MiKTeX 2.9\tex/generic/oberdiek\etexcmds.sty"
+("E:\Programs\MiKTeX 2.9\tex/generic/oberdiek\etexcmds.sty"
 Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
 
-("C:\Programs\MiKTeX 2.9\tex/generic/oberdiek\ifluatex.sty"
+("E:\Programs\MiKTeX 2.9\tex/generic/oberdiek\ifluatex.sty"
 Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
 ))))
-("C:\Programs\MiKTeX 2.9\tex/generic/oberdiek\pdftexcmds.sty"
+("E:\Programs\MiKTeX 2.9\tex/generic/oberdiek\pdftexcmds.sty"
 Package: pdftexcmds 2018/09/10 v0.29 Utility functions of pdfTeX for LuaTeX (HO
 )
 
-("C:\Programs\MiKTeX 2.9\tex/generic/oberdiek\ifpdf.sty"
+("E:\Programs\MiKTeX 2.9\tex/generic/oberdiek\ifpdf.sty"
 Package: ifpdf 2018/09/07 v3.3 Provides the ifpdf switch
 )
 Package pdftexcmds Info: LuaTeX not detected.
@@ -481,22 +481,72 @@ G,.JBIG2,.JB2,.eps]
 )
 LaTeX Font Info:    Try loading font information for U+msa on input line 39.
 
-("C:\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd"
+("E:\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 39.
 
-("C:\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd"
+("E:\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for TS1+ptm on input line 73.
+<klotski1.png, id=1, 221.37442pt x 295.1659pt>
+File: klotski1.png Graphic file (type png)
+<use klotski1.png>
+Package pdftex.def Info: klotski1.png  used on input line 58.
+(pdftex.def)             Requested size: 189.0pt x 252.01364pt.
+<klotski2.png, id=3, 221.37442pt x 295.92664pt>
+File: klotski2.png Graphic file (type png)
+<use klotski2.png>
+Package pdftex.def Info: klotski2.png  used on input line 69.
+(pdftex.def)             Requested size: 189.0pt x 252.66316pt.
+ [1{C:/Users/andre/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
-("C:\Programs\MiKTeX 2.9\tex/latex/psnfss\ts1ptm.fd"
-File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-) [1{C:/Users/andre/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
+
+ <./klotski1.png>]
+<klotski3.png, id=13, 176.91093pt x 48.93282pt>
+File: klotski3.png Graphic file (type png)
+<use klotski3.png>
+Package pdftex.def Info: klotski3.png  used on input line 84.
+(pdftex.def)             Requested size: 189.0pt x 52.27768pt.
+
+Overfull \hbox (20.06209pt too wide) in paragraph at lines 119--133
+ [] 
+ []
 
 
-]
+Underfull \hbox (badness 10000) in paragraph at lines 150--151
+[]\OT1/ptm/m/n/8 \Klotski - Aplica[][]oes no Google Play," [On-line]. Avail-abl
+e:
+ []
+
+
+Overfull \hbox (38.8528pt too wide) in paragraph at lines 150--151
+\OT1/ptm/m/n/8 https://play.google.com/store/apps/details?id=com.alcamasoft.jue
+gos.klotski.android.
+ []
+
+[2 <./klotski2.png> <./klotski3.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 151--152
+[]\OT1/ptm/m/n/8 \Klotski - Wikipedia," [On-line]. Avail-able:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 152--153
+[]\OT1/ptm/m/n/8 Goshuujin, \Github - Goshu-u-jin/Klotski," [On-line]. Avail-ab
+le:
+ []
+
+
+Underfull \hbox (badness 2035) in paragraph at lines 154--155
+[]\OT1/ptm/m/n/8 aschmied, \Github - aschmied/klotski-solver," [On-line]. Avail
+-able:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 156--157
+[]\OT1/ptm/m/n/8 D. R. Ying Dang, \Github," [On-line]. Avail-able:
+ []
+
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -508,23 +558,24 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[2] (Relatorio.aux) ) 
+[3
+
+] (Relatorio.aux) ) 
 Here is how much of TeX's memory you used:
- 4420 strings out of 492945
- 63389 string characters out of 3137718
- 140580 words of memory out of 3000000
- 8253 multiletter control sequences out of 15000+200000
- 39705 words of font info for 85 fonts, out of 3000000 for 9000
+ 4414 strings out of 492946
+ 63303 string characters out of 3137733
+ 141560 words of memory out of 3000000
+ 8243 multiletter control sequences out of 15000+200000
+ 42275 words of font info for 83 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,8n,35p,567b,273s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<C:/Pr
-ograms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Programs/MiKTeX
- 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Programs/MiKTeX 2.9/fonts/type1/urw/t
-imes/utmbi8a.pfb><C:/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/P
-rograms/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Relatorio.pdf (2 pages, 71835 bytes).
+ 41i,9n,35p,608b,273s stack positions out of 5000i,500n,10000p,200000b,50000s
+{E:/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<E:/Prog
+rams/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><E:/Programs/MiKTeX 2.9/fonts/
+type1/urw/times/utmbi8a.pfb><E:/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8
+a.pfb><E:/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
+Output written on Relatorio.pdf (3 pages, 497484 bytes).
 PDF statistics:
- 30 PDF objects out of 1000 (max. 8388607)
+ 36 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
