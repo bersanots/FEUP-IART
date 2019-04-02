@@ -141,40 +141,47 @@ class Klotski(Problem):
         return abs(x2 - x1) + abs(y2 - y1)
 
     # sums up the number of pieces between the goal (red) block and the final space
-    # including whether or not the empty spaces are adjacent
-    # and returns that value
     """def h(self, node):
         red_idx = self.find_red_piece(node.state)
         red_x = red_idx // 4
+        red_y = red_idx % 4
+        goal_x = self.goal // 4
+        goal_y = self.goal % 4
         total = 0
 
-        empty_index = int(node.state.index(0))
-        if (empty_index % 4 != 0  and  node.state[empty_index % 4] != 0) \
-            or (node.state[(empty_index + 4) % 20] != 0):
-            total += 2
+        for x in range(red_x, goal_x + 1):
+            for y in range(red_y, goal_y + 1):
+                if node.state[x*4 + y] != 0:
+                    total += 1
 
-        for key in sorted(set(node.state) - set([0])):
-            piece_idx = node.state.index(key)
-            piece_x = piece_idx // 4
-            if (piece_x > red_x):
-                piece_width = node.state[piece_x*4 : piece_x*4 + 4].count(key)
-                piece_heigth = 0
-                for v in range(red_idx, len(node.state), 4):
-                    if node.state[v] == 3:
-                        piece_heigth += 1
-                total += piece_width * piece_heigth
-        
-        return int(total)"""
+        return total"""
 
 
-def heuristic(node,goal):
+# Manhattan distance from the red block to the final space
+def heuristic_manhattan(node,goal):
         """ Return the heuristic value for a given state."""
 
-        # Manhattan Heuristic Function
         x1, y1 = node.state.index(1) // 4, node.state.index(1) % 4          #index 1 = red piece
         x2, y2 = goal // 4, goal % 4
 
         return abs(x2 - x1) + abs(y2 - y1)
+
+
+# sums up the number of pieces between the goal (red) block and the final space
+def heuristic_pieces_sum(node,goal):
+        red_idx = node.state.index(1)
+        red_x = red_idx // 4
+        red_y = red_idx % 4
+        goal_x = goal // 4
+        goal_y = goal % 4
+        total = 0
+
+        for x in range(red_x, goal_x + 1):
+            for y in range(red_y, goal_y + 1):
+                if node.state[x*4 + y] != 0:
+                    total += 1
+
+        return total
 
 
 
