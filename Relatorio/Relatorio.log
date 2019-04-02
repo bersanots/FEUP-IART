@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.6960 64-bit) (preloaded format=pdflatex 2019.4.2)  2 APR 2019 23:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.6960 64-bit) (preloaded format=pdflatex 2019.4.2)  2 APR 2019 23:47
 entering extended mode
 **./Relatorio.tex
 (Relatorio.tex
@@ -499,56 +499,61 @@ File: klotski3.png Graphic file (type png)
 Package pdftex.def Info: klotski3.png  used on input line 80.
 (pdftex.def)             Requested size: 189.0pt x 41.84727pt.
 
-Underfull \hbox (badness 2762) in paragraph at lines 106--107
-[]\OT1/ptm/m/n/10 Os op-er-adores/Jogadas est[]ao apli-cadas no c[]odigo de
+Underfull \hbox (badness 4608) in paragraph at lines 104--106
+\OT1/ptm/m/n/10 em modo de texto/gr[]afico um dado es-tado (m[]etodos
+ []
+
+
+Underfull \hbox (badness 2753) in paragraph at lines 104--106
+\OT1/ptm/m/n/10 val-i-dar uma dada jo-gada/operador (m[]etodos 'move[]up',
  []
 
 [2 <./klotski2.png> <./klotski3.png>]
-LaTeX Font Info:    Try loading font information for U+msa on input line 127.
+LaTeX Font Info:    Try loading font information for U+msa on input line 124.
 
 ("E:\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 127.
+LaTeX Font Info:    Try loading font information for U+msb on input line 124.
 
 ("E:\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Overfull \hbox (42.18202pt too wide) in paragraph at lines 127--143
+Overfull \hbox (42.18202pt too wide) in paragraph at lines 124--140
  [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 165--166
+Underfull \hbox (badness 10000) in paragraph at lines 162--163
 []\OT1/ptm/m/n/8 \Klotski - Aplica[][]oes no Google Play," [On-line]. Avail-abl
 e:
  []
 
 
-Overfull \hbox (38.8528pt too wide) in paragraph at lines 165--166
+Overfull \hbox (38.8528pt too wide) in paragraph at lines 162--163
 \OT1/ptm/m/n/8 https://play.google.com/store/apps/details?id=com.alcamasoft.jue
 gos.klotski.android.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 166--167
+Underfull \hbox (badness 10000) in paragraph at lines 163--164
 []\OT1/ptm/m/n/8 \Klotski - Wikipedia," [On-line]. Avail-able:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 167--168
+Underfull \hbox (badness 10000) in paragraph at lines 164--165
 []\OT1/ptm/m/n/8 Goshuujin, \Github - Goshu-u-jin/Klotski," [On-line]. Avail-ab
 le:
  []
 
 
-Underfull \hbox (badness 2035) in paragraph at lines 169--170
+Underfull \hbox (badness 2035) in paragraph at lines 166--167
 []\OT1/ptm/m/n/8 aschmied, \Github - aschmied/klotski-solver," [On-line]. Avail
 -able:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 171--172
+Underfull \hbox (badness 10000) in paragraph at lines 168--169
 []\OT1/ptm/m/n/8 D. R. Ying Dang, \Github," [On-line]. Avail-able:
  []
 
@@ -565,18 +570,18 @@ Before submitting the final camera ready copy, remember to:
 
 [3] (Relatorio.aux) ) 
 Here is how much of TeX's memory you used:
- 4413 strings out of 492946
- 63292 string characters out of 3137733
- 142560 words of memory out of 3000000
- 8243 multiletter control sequences out of 15000+200000
+ 4414 strings out of 492946
+ 63300 string characters out of 3137733
+ 141560 words of memory out of 3000000
+ 8244 multiletter control sequences out of 15000+200000
  40690 words of font info for 81 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,9n,35p,564b,256s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 41i,9n,35p,620b,256s stack positions out of 5000i,500n,10000p,200000b,50000s
 {E:/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<E:/Pr
 ograms/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><E:/Programs/MiKTeX 2.9/font
 s/type1/urw/times/utmbi8a.pfb><E:/Programs/MiKTeX 2.9/fonts/type1/urw/times/utm
 r8a.pfb><E:/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Relatorio.pdf (3 pages, 509123 bytes).
+Output written on Relatorio.pdf (3 pages, 509107 bytes).
 PDF statistics:
  36 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

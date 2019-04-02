@@ -101,17 +101,14 @@ Como foi referido anteriormente, foram encontradas diversas implementações do 
 O Programa utiliza ficheiros csv como meio para "receber" o estado do puzzle, seu tamanho, localização das diferentes peças e local final (onde deve ficar a peça objetivo).
 Tendo o estado do puzzle e o seu objetivo final, são aplicados os diferentes métodos de pesquisa para saber quais os passos necessários para chegar ao estado final no menor tempo possível.
 
-A representação do estado de jogo foi feita através de listas de listas para representar as diferentes células. As células e as peças têm as suas próprias classes de modo a poderem ter comportamentos distintos. Na figura 3 pode-se ver a representação de um estado de jogo.
-
-Os operadores/Jogadas estão aplicadas no código de maneira simples através de funções cujos o nomes são muito explícitos quanto à sua função: "move\_up", "move\_down", "move\_right" e "move\_left" (Mover para cima, baixo, direita e esquerda respetivamente). Estas funções também têm em conta as pré-condições de movimento (i.e. só move se for possivel mover)
-
-Existe também no código uma função chamada "terminal" que verifica se o tabuleiro se encontra num estado final (peças finais nas células finais).
+Foram implementadas, entre outras, as seguintes funções: ler nível de ficheiro
+(função 'node\_from\_csv'), visualizar em modo de texto/gráfico um dado estado (métodos '\_str\_' que convertem os estados para representação String), validar uma dada jogada/operador (métodos 'move\_up', 'move\_down', 'move\_right', 'move\_left'), executar uma dada jogada/operador, num dado tabuleiro, tendo em conta os seus efeitos e gerando o respetivo estado sucessor (mesmos movimentos referidos anteriormente), listar todas as jogadas/operadores disponíveis num dado tabuleiro, avaliar um dado estado (idem), testar se um dado estado é solução (método 'terminal').
 
 
 \section{Algoritmos de Pesquisa}
 Foram implementados os diferentes algoritmos de pesquisa para proceder à resolução deste puzzle. Os algoritmos implementados foram: Pesquisa Primeiro em Largura ("Breadth-First Search"), Pesquisa Primeiro em Profundidade ("Depth-First Search"), Pesquisa em Profundidade Iterativa, Pesquisa Gulosa ("Greedy Search") e Pesquisa A*. 
 
-A pesquisa de custo uniforme não foi realizada pois o custo é igual em todos os movimentos (custo 0), o que levaria a este algoritmo ser igual à pesquisa em largura, e este custo igualitário leva também a que a pesquisa A* seja igual à gulosa, pois apenas é utilizada a heurística (como se verá nos resultados). 
+É preciso dizer que a pesquisa de custo uniforme não foi feita porque o custo é igual em todos os movimentos (custo 1), o que levaria a este algoritmo ser igual à pesquisa em largura, e este custo constante leva também a que a pesquisa A* seja igual à gulosa, pois apenas é utilizada uma heurística e não o custo da ação.
 
 Foram criadas duas heurísticas para o Algoritmo A*. A primeira heurística calcula a distância de Manhattan (soma das distâncias entre as linhas e as colunas) entre a peça vermelha e  e a posição objetivo). A segunda heurística calcula o número de peças localizadas entre a peça vermelha e a posição objetivo. Como se pode comprovar pelos resultados da tabela em baixo, a primeira heurística revelou-se bastante mais eficiente.
 
