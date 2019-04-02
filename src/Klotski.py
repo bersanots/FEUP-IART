@@ -3,6 +3,8 @@
 import copy
 import csv
 from bot import * 
+import time
+
 
 TAMANHO = {"X":4,"Y":5}
 
@@ -20,7 +22,7 @@ class Peca(object):
         return self.id == other.id
     
     def __str__(self):
-        return "p=" + str(self.id) + ";"+ self.tipo
+        return "p=[" + str(self.id) + "];"+ self.tipo
 
 
 class Celula(object):
@@ -28,7 +30,7 @@ class Celula(object):
         self.tipo = tipo ## final= f ; parede = p ; normal = n
         self.conteudo = peca ## = peca
     def __str__(self):
-        return "c=" + self.tipo + ";" + (str(self.conteudo) if self.conteudo != None else "p=0;0")
+        return "c=" + self.tipo + ";" + (str(self.conteudo) if self.conteudo != None else "p=[_];0")
 
 
 
@@ -319,6 +321,28 @@ def node_from_csv(file = 'default.csv'):
     return base_node
 
 
+#print a board representation of a state from a list
+def print_board(node, state):
+    for idx in range(len(state)):
+        if idx%4 == 0:
+            print()
+        piece = state[idx]
+        c_type = node.table[idx%4][idx//4].tipo
+        c_content = "p=[" + str(piece) + "];" + ("f" if piece == 1 else "n")
+        print("c=" + c_type + ";" + (str(c_content) if piece != 0 else "p=[_];0") + ' | ', end='')
+
+#string representation of a piece movement
+def move_as_string(move):
+    #check if piece id has 1 or 2 digits
+    if move[1].isdigit():
+        delim = 2
+    else:
+        delim = 1
+    id_piece = move[:delim]
+    direction = move[delim:]
+
+    return "Move " + direction + " the piece with ID=" + id_piece
+
 def init():
     bnode = node_from_csv()
     while True:
@@ -379,11 +403,11 @@ mode = int(input('Escolha uma opção: '))
 if mode == 1:
     init()
 else:
-    node = node_from_csv()
+    node = node_from_csv('easy.csv')
     board = node.table
     pieces = node.pecas
     goal_index = None
-    state = [None] * 20                           #put in format for the Klotski solver
+    state = [None] * 20                           #put in list format for the Klotski solver
     for column in board:
         for cell in column:
             if cell.tipo == 'f' and goal_index == None:
@@ -397,13 +421,47 @@ else:
     print(str(node))
     print("Resolvendo...")
 
+    start_time = time.time()
+
     if mode == 2:
-        print("bfs: " + str(breadth_first_graph_search(puzzle).solution()))
+        search = breadth_first_graph_search(puzzle)
+        moves = search.solution()
+        states = search.solution_states()
+        for idx in range(len(states)):
+            print("\n\n\n" + move_as_string(moves[idx]))
+            print_board(node, states[idx])
+        print("\n\nbfs: " + str(moves))
     elif mode == 3:
-        print("dfs: " + str(depth_first_graph_search(puzzle).solution()))
+        search = depth_first_graph_search(puzzle)
+        moves = search.solution()
+        states = search.solution_states()
+        for idx in range(len(states)):
+            print("\n\n\n" + move_as_string(moves[idx]))
+            print_board(node, states[idx])
+        print("\n\ndfs: " + str(moves))
     elif mode == 4:
-        print("iterative: " + str(iterative_deepening_search(puzzle).solution()))
+        search = iterative_deepening_search(puzzle)
+        moves = search.solution()
+        states = search.solution_states()
+        for idx in range(len(states)):
+            print("\n\n\n" + move_as_string(moves[idx]))
+            print_board(node, states[idx])
+        print("\n\niterative: " + str(moves))
     elif mode == 5:
-        print("greedy: " + str(greedy_best_first_graph_search(puzzle,lambda n: n.path_cost + heuristic(n,goal_index)).solution()))
+        search = greedy_best_first_graph_search(puzzle,lambda n: n.path_cost + heuristic(n,goal_index))
+        moves = search.solution()
+        states = search.solution_states()
+        for idx in range(len(states)):
+            print("\n\n\n" + move_as_string(moves[idx]))
+            print_board(node, states[idx])
+        print("\n\ngreedy: " + str(moves))
     elif mode == 6:
-        print("A*: " + str(astar_search(puzzle).solution()))
+        search = astar_search(puzzle)
+        moves = search.solution()
+        states = search.solution_states()
+        for idx in range(len(states)):
+            print("\n\n\n" + move_as_string(moves[idx]))
+            print_board(node, states[idx])
+        print("\n\nA*: " + str(moves))
+
+    print("--- %s seconds ---" % (time.time() - start_time))

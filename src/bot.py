@@ -140,7 +140,7 @@ class Klotski(Problem):
 
         return abs(x2 - x1) + abs(y2 - y1)"""
 
-    # sums up the number of cells between the goal (red) block
+    # sums up the number of pieces between the goal (red) block and the final space
     # including whether or not the empty spaces are adjacent
     # and returns that value
     def h(self, node):
