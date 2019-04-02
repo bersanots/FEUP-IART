@@ -131,19 +131,19 @@ class Klotski(Problem):
         return self.find_red_piece(state) == self.goal
 
     #Manhattan
-    """def h(self, node):
+    def h(self, node):
         " Return the heuristic value for a given state."
 
         # Manhattan Heuristic Function
         x1, y1 = self.find_red_piece(node.state) // 4, self.find_red_piece(node.state) % 4
         x2, y2 = self.goal // 4, self.goal % 4
 
-        return abs(x2 - x1) + abs(y2 - y1)"""
+        return abs(x2 - x1) + abs(y2 - y1)
 
     # sums up the number of pieces between the goal (red) block and the final space
     # including whether or not the empty spaces are adjacent
     # and returns that value
-    def h(self, node):
+    """def h(self, node):
         red_idx = self.find_red_piece(node.state)
         red_x = red_idx // 4
         total = 0
@@ -164,7 +164,7 @@ class Klotski(Problem):
                         piece_heigth += 1
                 total += piece_width * piece_heigth
         
-        return int(total)
+        return int(total)"""
 
 
 def heuristic(node,goal):

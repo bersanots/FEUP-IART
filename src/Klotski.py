@@ -465,3 +465,4 @@ else:
         print("\n\nA*: " + str(moves))
 
     print("--- %s seconds ---" % (time.time() - start_time))
+    print("Explored nodes: " + str(Node.explored_nodes))
