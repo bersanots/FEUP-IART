@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.6960 64-bit) (preloaded format=pdflatex 2019.4.2)  2 APR 2019 18:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.6960 64-bit) (preloaded format=pdflatex 2019.4.2)  2 APR 2019 23:31
 entering extended mode
 **./Relatorio.tex
 (Relatorio.tex
@@ -479,71 +479,76 @@ Package grfext Info: Graphics extension search list:
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 39.
-
-("E:\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd"
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Try loading font information for U+msb on input line 39.
-
-("E:\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd"
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
 <klotski1.png, id=1, 221.37442pt x 295.1659pt>
 File: klotski1.png Graphic file (type png)
 <use klotski1.png>
-Package pdftex.def Info: klotski1.png  used on input line 58.
+Package pdftex.def Info: klotski1.png  used on input line 54.
 (pdftex.def)             Requested size: 189.0pt x 252.01364pt.
 <klotski2.png, id=3, 221.37442pt x 295.92664pt>
 File: klotski2.png Graphic file (type png)
 <use klotski2.png>
-Package pdftex.def Info: klotski2.png  used on input line 69.
+Package pdftex.def Info: klotski2.png  used on input line 65.
 (pdftex.def)             Requested size: 189.0pt x 252.66316pt.
  [1{C:/Users/andre/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 
  <./klotski1.png>]
-<klotski3.png, id=13, 176.91093pt x 48.93282pt>
+<klotski3.png, id=13, 204.01219pt x 45.16875pt>
 File: klotski3.png Graphic file (type png)
 <use klotski3.png>
-Package pdftex.def Info: klotski3.png  used on input line 84.
-(pdftex.def)             Requested size: 189.0pt x 52.27768pt.
+Package pdftex.def Info: klotski3.png  used on input line 80.
+(pdftex.def)             Requested size: 189.0pt x 41.84727pt.
 
-Overfull \hbox (20.06209pt too wide) in paragraph at lines 119--133
+Underfull \hbox (badness 2762) in paragraph at lines 106--107
+[]\OT1/ptm/m/n/10 Os op-er-adores/Jogadas est[]ao apli-cadas no c[]odigo de
+ []
+
+[2 <./klotski2.png> <./klotski3.png>]
+LaTeX Font Info:    Try loading font information for U+msa on input line 127.
+
+("E:\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd"
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 127.
+
+("E:\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd"
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+Overfull \hbox (42.18202pt too wide) in paragraph at lines 127--143
  [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 150--151
+Underfull \hbox (badness 10000) in paragraph at lines 165--166
 []\OT1/ptm/m/n/8 \Klotski - Aplica[][]oes no Google Play," [On-line]. Avail-abl
 e:
  []
 
 
-Overfull \hbox (38.8528pt too wide) in paragraph at lines 150--151
+Overfull \hbox (38.8528pt too wide) in paragraph at lines 165--166
 \OT1/ptm/m/n/8 https://play.google.com/store/apps/details?id=com.alcamasoft.jue
 gos.klotski.android.
  []
 
-[2 <./klotski2.png> <./klotski3.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 151--152
+
+Underfull \hbox (badness 10000) in paragraph at lines 166--167
 []\OT1/ptm/m/n/8 \Klotski - Wikipedia," [On-line]. Avail-able:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 152--153
+Underfull \hbox (badness 10000) in paragraph at lines 167--168
 []\OT1/ptm/m/n/8 Goshuujin, \Github - Goshu-u-jin/Klotski," [On-line]. Avail-ab
 le:
  []
 
 
-Underfull \hbox (badness 2035) in paragraph at lines 154--155
+Underfull \hbox (badness 2035) in paragraph at lines 169--170
 []\OT1/ptm/m/n/8 aschmied, \Github - aschmied/klotski-solver," [On-line]. Avail
 -able:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 156--157
+Underfull \hbox (badness 10000) in paragraph at lines 171--172
 []\OT1/ptm/m/n/8 D. R. Ying Dang, \Github," [On-line]. Avail-able:
  []
 
@@ -558,22 +563,20 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[3
-
-] (Relatorio.aux) ) 
+[3] (Relatorio.aux) ) 
 Here is how much of TeX's memory you used:
- 4414 strings out of 492946
- 63303 string characters out of 3137733
- 141560 words of memory out of 3000000
+ 4413 strings out of 492946
+ 63292 string characters out of 3137733
+ 142560 words of memory out of 3000000
  8243 multiletter control sequences out of 15000+200000
- 42275 words of font info for 83 fonts, out of 3000000 for 9000
+ 40690 words of font info for 81 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,9n,35p,608b,273s stack positions out of 5000i,500n,10000p,200000b,50000s
-{E:/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<E:/Prog
-rams/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><E:/Programs/MiKTeX 2.9/fonts/
-type1/urw/times/utmbi8a.pfb><E:/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8
-a.pfb><E:/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Relatorio.pdf (3 pages, 497484 bytes).
+ 41i,9n,35p,564b,256s stack positions out of 5000i,500n,10000p,200000b,50000s
+{E:/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<E:/Pr
+ograms/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><E:/Programs/MiKTeX 2.9/font
+s/type1/urw/times/utmbi8a.pfb><E:/Programs/MiKTeX 2.9/fonts/type1/urw/times/utm
+r8a.pfb><E:/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
+Output written on Relatorio.pdf (3 pages, 509123 bytes).
 PDF statistics:
  36 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
