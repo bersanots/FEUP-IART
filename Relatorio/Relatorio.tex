@@ -11,11 +11,7 @@
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
-\title{Resolução do Klotski utilizando Métodos de Pesquisa em Python (Tema 1/ Grupo 31)\\
-{\footnotesize \textsuperscript{*}Note: Sub-titles are not captured in Xplore and
-should not be used}
-\thanks{Identify applicable funding agency here. If none, delete this.}
-}
+\title{Resolução do Klotski utilizando Métodos de Pesquisa em Python (Tema 1/ Grupo 31)}
 
 \author{\IEEEauthorblockN{André Lopes dos Santos (200505634)}
 \IEEEauthorblockA{\textit{Departamento de Engenharia Informática} \\
@@ -40,7 +36,7 @@ ei06054@fe.up.pt}
 
 \begin{abstract}
 Abordagem a diversos métodos de pesquisa e seus algoritmos, que são uma componente importante da inteligência artificial, assim como à utilização dos mesmos na resolução do Klotski, um conhecido puzzle de deslizamento de blocos.
-A linguagem utilizada para a implementação do mesmo é o Python, sendo que o código nesta linguagem para a implementação deste puzzle e para a aplicação dos diferentes algoritmos é adaptado para atingir os objetivos.
+Para a resolução deste puzzle, são aplicados diversos métodos de pesquisa que são adaptados a este puzzle de modo a resolver o mesmo. A linguagem utilizada para implementar estes métodos é Python e verificou-se que os métodos de Pesquisas Gulosa e Pesquisa A* foram aqueles que se mostraram mais eficazes na resolução destes puzzles.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -77,12 +73,12 @@ A variante aqui estudada é a iteração presente na Google Play Store \cite{b1}
 \textbf{Representação do Estado:} O estado é representado por uma Matriz de tamanho variável (a * b) [0 – espaço livre], e pela posição das diferentes peças que são numeradas (1, 2, 3, etc.). 
 Tanto as células do puzzle como os as diferentes peças, têm uma característica extra: n- normal; f-final. No caso das células estes representam as células normais do jogo enquanto as células finais representam os sítios onde se devem encontrar as peças finais. No caso das diferentes peças, as peças normais representam as peças móveis que se conhecem, e a peça final é aquela cujo objetivo é levar à(s) célula(s) final(ais).
 
-\textbf{Estados Iniciais:} Os estados iniciais variam conforme o puzzle a ser resolvido. Na Figura 1 pode-se ver um exemplos de uma representação gráfica de um estado inicial de um puzzle. Na Figura 3 pode-se ver uma representação desse mesmo puzzle num terminal.
+\textbf{Estados Iniciais:} Os estados iniciais variam conforme o puzzle a ser resolvido. Na Figura 1 pode-se ver um exemplos de uma representação gráfica de um estado inicial de um puzzle. Na Figura 3 pode-se ver uma representação de um puzzle (mais simples) no terminal.
 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.75\linewidth]{klotski3.png}
-	\caption{Puzzle de Klotski: Representação no terminal}
+	\caption{Puzzle de Klotski mais simples: Representação no terminal}
 	\label{fig:klotski3}
 \end{figure}
 
@@ -105,37 +101,56 @@ Como foi referido anteriormente, foram encontradas diversas implementações do 
 O Programa utiliza ficheiros csv como meio para "receber" o estado do puzzle, seu tamanho, localização das diferentes peças e local final (onde deve ficar a peça objetivo).
 Tendo o estado do puzzle e o seu objetivo final, são aplicados os diferentes métodos de pesquisa para saber quais os passos necessários para chegar ao estado final no menor tempo possível.
 
+A representação do estado de jogo foi feita através de listas de listas para representar as diferentes células. As células e as peças têm as suas próprias classes de modo a poderem ter comportamentos distintos. Na figura 3 pode-se ver a representação de um estado de jogo.
+
+Os operadores/Jogadas estão aplicadas no código de maneira simples através de funções cujos o nomes são muito explícitos quanto à sua função: "move\_up", "move\_down", "move\_right" e "move\_left" (Mover para cima, baixo, direita e esquerda respetivamente). Estas funções também têm em conta as pré-condições de movimento (i.e. só move se for possivel mover)
+
+Existe também no código uma função chamada "terminal" que verifica se o tabuleiro se encontra num estado final (peças finais nas células finais).
+
 
 \section{Algoritmos de Pesquisa}
-Foram implementados os diferentes algoritmos de pesquisa para proceder à resolução deste puzzle. Os algoritmos implementados foram: Pesquisa Primeiro em Largura ("Breadth-First Search"), Pesquisa de Custo Uniforme, Pesquisa Primeiro em Profundidade ("Depth-First Search"), Pesquisa em Profundidade Iterativa, Pesquisa Gulosa ("Greedy Search") e Pesquisa A*. Para implementar estes diferentes algoritmos no nosso jogo, foi adaptado a lógica de jogo aos algoritmos do livro \cite{b8}, sendo que o código desses mesmos algoritmos é o mesmo presente no GitHub do livro \cite{b9}.
+Foram implementados os diferentes algoritmos de pesquisa para proceder à resolução deste puzzle. Os algoritmos implementados foram: Pesquisa Primeiro em Largura ("Breadth-First Search"), Pesquisa Primeiro em Profundidade ("Depth-First Search"), Pesquisa em Profundidade Iterativa, Pesquisa Gulosa ("Greedy Search") e Pesquisa A*. 
+
+A pesquisa de custo uniforme não foi realizada pois o custo é igual em todos os movimentos (custo 0), o que levaria a este algoritmo ser igual à pesquisa em largura, e este custo igualitário leva também a que a pesquisa A* seja igual à gulosa, pois apenas é utilizada a heurística (como se verá nos resultados). 
+
+Foram criadas duas heurísticas para o Algoritmo A*. A primeira heurística calcula a distância de Manhattan (soma das distâncias entre as linhas e as colunas) entre a peça vermelha e  e a posição objetivo). A segunda heurística calcula o número de peças localizadas entre a peça vermelha e a posição objetivo. Como se pode comprovar pelos resultados da tabela em baixo, a primeira heurística revelou-se bastante mais eficiente.
+
+Para implementar estes diferentes algoritmos no nosso jogo, foi adaptado a lógica de jogo aos algoritmos do livro \cite{b8}, sendo que o código desses mesmos algoritmos é o mesmo presente no GitHub do livro \cite{b9}.
 
 
 \section{Experiências e Resultados}
-Realizaram-se diversas experiências, comparando o desempenho dos diferentes algoritmos na resolução dum puzzle Klotski. Na tabela seguinte pode-se ver a comparação dos diferentes métodos de resolução
+Realizaram-se diversas experiências, comparando o desempenho dos diferentes algoritmos na resolução dum puzzle Klotski mais simplicado. A utilização deste mesmo puzzle mais simples deve-se ao facto de a resolução deste levar menos tempo e assim ser um possivel testar o código desenvolvido em tempo útil. Na Figura 3 pode-se encontrar uma representação deste mesmo puzzle, tal como este aparece no terminal e cujo ficheiro csv é "easy.csv". Na tabela seguinte pode-se ver a comparação dos diferentes métodos de resolução
 
 \begin{table}[htbp]
 \caption{Comparação dos diferentes métodos de pesquisa}
 \begin{center}
 \begin{tabular}{|c|c|c|}
 \hline
-\textbf{Método de pesquisa} & \textbf{Tempo (segundos)} & \textbf{Número de nós)} \\
+\textbf{Método de pesquisa} & \textbf{Tempo (segundos)} & \textbf{Nós explorados} \\
 \hline
- Pesquisa Primeiro em Largura & 23 & 45\\
- Pesquisa de Custo Uniforme & 23 & 45 \\
- Pesquisa Primeiro em Profundidade & 23 & 45\\
- Pesquisa em Profundidade Iterativa & 23 & 45\\
- Pesquisa Gulosa & 23 & 45\\ 
- Pesquisa A* & 23 & 45\\
+ Pesquisa Primeiro em Largura & 2,10389 & 8340\\
+ Pesquisa Primeiro em Profundidade & ? & ?\\
+ Pesquisa com Aprofundamento Progressivo & 0,48823 & 41593\\
+ Pesquisa Gulosa & 0,01297 & 94\\ 
+ Pesquisa com algoritmo A* (h1) & 0,01293 & 94\\
+ Pesquisa com algoritmo A* (h2) & 86,33182 & 31459\\
 \hline
+
+
 
 \end{tabular}
 \label{tab1}
 \end{center}
 \end{table}
 
+A Pesquisa Primeiro em Profundidade estava a demorar um tempo superior a 10 minutos, razão pela qual os seus resultados aparecem com um ponto de interrogação ("?").
 
 \section{Conclusões e Perspetivas de Desenvolvimento}
-Como se pode verificar na secção anterior, e tal como seria teoricamente esperado, o método A* foi aquele que mostrou ser o mais eficaz na resolução do puzzle klotski. Infelizmente ainda não foi possível implementar certas regras de jogo que são específicas em relação ao que existe na Google Play Store.
+
+
+Como se pode verificar na secção anterior, e tal como seria teoricamente esperado, o método de pesquisa A* e o da Pesquisa Gulosa foram aqueles que mostram ser o mais eficazes na resolução do puzzle Klotski. Esta similitude entre estes dois métodos, como foi explicado anteriormente, deve-se ao facto do custo ser igual em todos os movimentos de jogo.
+
+Infelizmente ainda não foi possível implementar certas regras de jogo que são específicas em relação ao que existe na Google Play Store, mas sem dúvida que a adição das regras específicas desta variante de Klotski adicionaria mais complexidade ao problema, fazendo com que estes mesmos métodos de pesquisa levassem mais tempo a resolver estes puzzles que um puzzle klotski tradicional.
 
 
 
