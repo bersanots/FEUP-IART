@@ -396,7 +396,8 @@ print("2 - Resolver através de uma pesquisa em largura.")
 print("3 - Resolver através de uma pesquisa em profundidade.")
 print("4 - Resolver através de uma pesquisa com aprofundamento progressivo.")
 print("5 - Resolver através de uma pesquisa gulosa.")
-print("6 - Resolver através de uma pesquisa com Algoritmo A*.")
+print("6 - Resolver através de uma pesquisa com Algoritmo A* (heuristica Manhattan).")
+print("7 - Resolver através de uma pesquisa com Algoritmo A* (heuristica Soma).")
 print("")
 mode = int(input('Escolha uma opção: '))
 
@@ -448,7 +449,7 @@ else:
             print_board(node, states[idx])
         print("\n\niterative: " + str(moves))
     elif mode == 5:
-        search = greedy_best_first_graph_search(puzzle,lambda n: n.path_cost + heuristic(n,goal_index))
+        search = greedy_best_first_graph_search(puzzle,lambda n: n.path_cost + heuristic_manhattan(n,goal_index))
         moves = search.solution()
         states = search.solution_states()
         for idx in range(len(states)):
@@ -462,7 +463,18 @@ else:
         for idx in range(len(states)):
             print("\n\n\n" + move_as_string(moves[idx]))
             print_board(node, states[idx])
-        print("\n\nA*: " + str(moves))
+        print("\n\nA* (h1): " + str(moves))
+    elif mode == 7:
+        search = astar_search(puzzle,lambda n: n.path_cost + heuristic_pieces_sum(n,goal_index))
+        moves = search.solution()
+        states = search.solution_states()
+        for idx in range(len(states)):
+            print("\n\n\n" + move_as_string(moves[idx]))
+            print_board(node, states[idx])
+        print("\n\nA* (h2): " + str(moves))
+    else:
+        print("Invalid option")
+        exit
 
     print("--- %s seconds ---" % (time.time() - start_time))
     print("Explored nodes: " + str(Node.explored_nodes))
