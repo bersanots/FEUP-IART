@@ -405,7 +405,7 @@ mode = int(input('Escolha uma opção: '))
 if mode == 1:
     init()
 else:
-    node = node_from_csv('easy.csv')
+    node = node_from_csv('medium.csv')
     board = node.table
     pieces = node.pecas
     goal_index = None
