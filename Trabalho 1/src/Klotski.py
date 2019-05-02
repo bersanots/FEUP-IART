@@ -344,7 +344,7 @@ def move_as_string(move):
     return "Move " + direction + " the piece with ID=" + id_piece
 
 def init():
-    bnode = node_from_csv()
+    bnode = node_from_csv('easy.csv')
     while True:
         print(str(bnode))
         print("move")
@@ -377,6 +377,7 @@ def init():
                 bnode = n
         
         if  bnode.terminal():
+            print(str(bnode))
             print("CONGRATULATIONS YOU WON!!")
             break
     
@@ -404,7 +405,7 @@ mode = int(input('Escolha uma opção: '))
 if mode == 1:
     init()
 else:
-    node = node_from_csv('easy.csv')
+    node = node_from_csv('medium.csv')
     board = node.table
     pieces = node.pecas
     goal_index = None
