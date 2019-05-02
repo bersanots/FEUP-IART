@@ -1,0 +1,23 @@
+Trabalho relacionado
+
+Existem varios estudos (1,2,3,4), com várias abordagens, que utilizam inteligencia artificial por forma a classificar actividades humanas em tempo real. 
+
+O estudo (1) centra-se na classificação da saida da cama do paciente. Os algoritmos usados sentram-se em modelar uma sequencia de primeira ordem Markov Chain.
+
+Em (2) o objectivo era classificar a  saida da cama e da cadeira pelo paciente em tempo real. Este estudo baseia-se na modelação probabilistica sequencias lineares  conditional random fields (CRF).
+
+À semelhança de (2) o estudo (3) também utiliza conditional random fields (CRF) mas usando tecnicas de sliding window.
+
+Em (4) o algoritmo conditional random fields (CRF) também é usado.
+
+
+
+
+(1) - Asanga Wickramasinghe, Christophe Fumeaux, Keith D. Hill and Renuka Visvanathan in "Sequence Learning with Passive RFID Sensors for Real-Time Bed-Egress Recognition in Older People", IEEE JOURNAL OF BIOMEDICAL AND HEALTH INFORMATICS, VOL. 21, NO. 4, JULY 2017
+
+(2) - Roberto Luis Shinmoto Torres, Renuka Visvanathan, Stephen Hoskins, Anton van den Hengel and Damith C. Ranasinghe in "Effectiveness of a Batteryless and Wireless Wearable Sensor System for Identifying Bed and Chair Exits in Healthy Older People"
+
+(3) - Roberto Luis Shinmoto Torres, Damith C. Ranasinghe and Qinfeng Shi in "Evaluation of Wearable Sensor Tag Data Segmentation Approaches for Real Time Activity Classification in Elderly"
+
+
+(4) - Roberto L. Shinmoto Torres, Damith C. Ranasinghe, Qinfeng Shi and Alanson P. Sample in "Sensor Enabled Wearable RFID Technology for Mitigating the Risk of Falls Near Beds"
