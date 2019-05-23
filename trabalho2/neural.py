@@ -165,7 +165,10 @@ if len(sys.argv) > 1:
             if args[0] != 'path':
                 arguments[args[0]] = float(args[1])
             else:
-                arguments[args[0]] = args[1]
+                if args[1][len(args[1])-1] == '\\':
+                    arguments[args[0]] = args[1]
+                else:
+                    arguments[args[0]] = args[1] + '\\'
 
     if 'path' not in  arguments:
         print('ERROR no path to dataset specified')
