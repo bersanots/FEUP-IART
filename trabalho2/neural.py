@@ -8,6 +8,7 @@ import random
 import copy
 import math
 import numpy
+import os
 
 
 class Input(object):
@@ -20,15 +21,40 @@ class Output(object):
 
 class Window(object):
     def __init__(self):
+        self.lines = []
         self.inputs = []
         self.outputs = []
     
-    def add_input(self, values):
-        self.inputs.append(values)
+    # def add_input(self, values):
+    #     self.inputs.append(values)
     
-    def add_output(self, value):
-        self.outputs.append(value)
+    # def add_output(self, value):
+    #     self.outputs.append(value)
 
+    def add_lines(self, line):
+        self.lines.append(line)
+
+    def filter_lines(self):
+        #filter diferent outputs
+        n_ouputs = {}
+        for l in self.lines:
+            if l["output"] in n_ouputs:
+                n_ouputs[l["output"]] = n_ouputs[l["output"]] +1
+            else:
+                n_ouputs[l["output"]] = 1
+        output_king = max(n_ouputs,key=n_ouputs.get)
+
+        for l in self.lines:
+            if l["output"] != output_king:
+                self.lines.remove(l)
+
+        #add filtered lines
+        for l in self.lines:
+            ip = list(l.values())
+            self.inputs.append(ip[:-1]) #add all except output
+            self.outputs.append(ip[-1:])
+
+    
     def get_median_inputs(self):
         values = [ float(x) for x in self.inputs[0]]
         nwin = len(self.inputs)
@@ -43,11 +69,11 @@ class Window(object):
         return values
 
     def get_median_output(self):
-        value = float(self.outputs[0])
-        nwin = len(self.outputs)
-        for i in range(1,nwin):
-            value = value + float(self.outputs[i])
-        value = value/nwin
+        value = [float(self.outputs[0][0])]
+        # nwin = len(self.outputs)
+        # for i in range(1,nwin):
+        #     value = value + float(self.outputs[i])
+        # value = value/nwin
 
         """         return Output(value) """
         return value
@@ -80,14 +106,33 @@ class Neural_Network(object):
 
         z = numpy.dot(inputs, self.weight_input)
         
-        z2 = self.sigmoid(z)
+        self.act_function = self.sigmoid(z)
 
-        z3 = numpy.dot(z2,self.weight_hnodes)
+        z3 = numpy.dot(self.act_function,self.weight_hnodes)
 
         return self.sigmoid(z3)
 
     def sigmoidPrime(self,x):
         return x*(1-x)
+
+    def backward(self, input, act_output, predicted):
+        self.p_error = act_output - predicted
+        self.p_delta = self.p_error*self.sigmoidPrime(predicted)
+        # print("act_output",act_output)
+        # print("predicted",predicted)
+        # print("p_error",self.p_error)
+        # print("p_delta",self.p_delta)
+        # print("weight_hno", self.weight_hnodes)
+
+        self.h_error = self.p_delta.dot(self.weight_hnodes.T)
+        self.h_delta = self.h_error*self.sigmoidPrime(self.act_function)
+
+        self.weight_input += input.T.dot(self.h_delta)
+        self.weight_hnodes += self.act_function.T.dot(self.p_delta)
+
+    def train(self, input, act_output):
+        o = self.forward(input)
+        self.backward(input,act_output,o)
 
     
 
@@ -106,6 +151,7 @@ In addition, gender of participant is included in the last character of file nam
 def read_data_sets():
     window_list = []
     file_list = glob.glob(arguments['path'] + 'd?p[0-9]*[MF]')
+    #print("files",file_list)
     test_files = random.sample(file_list,k=int(len(file_list)*2/3))
 
     for file in test_files:
@@ -114,13 +160,23 @@ def read_data_sets():
             time_slot = 0
             win = Window()
             for row in reader:
-                inputs = row[1:-1] # copiar tudo menos o ultimo que e' o output e o tempo
                 if len(row) == 9:
+                #inputs = row[1:-1] # copiar tudo menos o ultimo que e' o output e o tempo
                     gender = file[-1:]
-                    if gender == 'M':
-                        inputs.append(1)
-                    else:
-                        inputs.append(2)
+                    g = 1
+                    if gender != 'M':
+                        g = 2
+                    inputs = { 
+                        'GF' : row[1],
+                        'GV':row[2],
+                        'GL':row[3],
+                        'antenna':row[4],
+                        'rssi':row[5],
+                        'phase':row[6],
+                        'freq':row[7],
+                        'gender' : g,
+                        'output':row[8]
+                        }
 
                     curr_slot = float(row[0])/arguments['window']
                     
@@ -128,8 +184,8 @@ def read_data_sets():
                         window_list.append(win)
                         win = Window()
 
-                    win.add_input(inputs)
-                    win.add_output(row[8])
+                    win.add_lines(inputs)
+                    
                     time_slot = time_slot +1
                     
                     #print('time',row[0])
@@ -154,39 +210,42 @@ file_list = []
 test_files = []
 training_inputs = None
 training_outputs = None
-arguments = {'window' : 5, 'hnodes' : 8, 'rate':0.03, 'sample':0.75}
+arguments = {'window' : 5, 'hnodes' : 8, 'rate':0.03, 'sample':0.75, 'iterations':1000}
 
 neural_net = Neural_Network()
 
 if len(sys.argv) > 1:
     for i in range(1,len(sys.argv)):
-        if sys.argv[1].find('=') > 0:
-            args = sys.argv[1].split('=')
+        if sys.argv[i].find('=') > 0:
+            args = sys.argv[i].split('=')
             if args[0] != 'path':
                 arguments[args[0]] = float(args[1])
             else:
-                if args[1][len(args[1])-1] == '\\':
-                    arguments[args[0]] = args[1]
-                else:
-                    arguments[args[0]] = args[1] + '\\'
+                arguments[args[0]] = os.path.join(args[1], '') #add trailing slash, os independent
 
     if 'path' not in  arguments:
         print('ERROR no path to dataset specified')
     else:
         #set defaults
         window_list = read_data_sets()
-        training_inputs = numpy.array([window_list[i].get_median_inputs() for i in range(len(window_list))], dtype=float)
-        training_outputs = numpy.array([window_list[i].get_median_output() for i in range(len(window_list))], dtype=float)
-        """ for i in range(len(window_list)):
-            training_inputs.append(window_list[i].get_median_inputs())
-            training_outputs.append(window_list[i].get_median_output()) """
+        arr_i = []
+        arr_o = []
+        for w in window_list:
+            w.filter_lines()
+            arr_i.append(w.get_median_inputs())
+            arr_o.append(w.get_median_output())
 
+
+        training_inputs = numpy.array(arr_i, dtype=float)
+        training_outputs = numpy.array(arr_o, dtype=float)
+
+ 
         #scale
         training_inputs = training_inputs /numpy.amax(training_inputs,axis=0)
-        training_outputs = training_outputs/10
+        training_outputs = training_outputs/10#4 # val max de output
 
-        print('neural_net: ', neural_net.forward(training_inputs)   )
-        print('expected_output', training_outputs)
+        # print('neural_net: ', neural_net.forward(training_inputs)   )
+        # print('expected_output', training_outputs)
 
 
 
@@ -195,11 +254,14 @@ else:
     print('path=[path_to_dataset]')
     print('window=[sliding window size in seconds] -> default 5 seconds')
     print('hnodes=[number_of__hidden_nodes] -> default 8 = inputs-1')
-    print('rate=[learning_rate] = default 0.03')
+    print('iterations=[iterations] = default 1000')
     print('sample=[sample_rate] -> default 0.75 = 75% training, 25% test')
 
 
+for i in range(int(arguments['iterations'])):
+    neural_net.train(training_inputs,training_outputs)
+predicted_out = neural_net.forward(training_inputs)
 
-
-
+for i in range(len(training_outputs)):
+    print("actual = ", training_outputs[i]," predicted = ",predicted_out[i])
 
