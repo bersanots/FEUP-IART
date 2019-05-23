@@ -1,0 +1,109 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+
+\title{Aprendizagem Supervisionada em Python: Reconhecimento de atividade em pessoas idosas (Tema C3/ Grupo 31)}
+
+\author{\IEEEauthorblockN{André Lopes dos Santos (200505634)}
+\IEEEauthorblockA{\textit{Departamento de Engenharia Informática} \\
+\textit{Faculdade de Engenharia da Universidade do Porto}\\
+Porto, Portugal \\
+up200505634@fe.up.pt}
+\and
+\IEEEauthorblockN{Bernardo Oliveira Teixeira Santos (201504711)}
+\IEEEauthorblockA{\textit{Departamento de Engenharia Informática} \\
+\textit{Faculdade de Engenharia da Universidade do Porto}\\
+Porto, Portugal \\
+up201504711@fe.up.pt}
+\and
+\IEEEauthorblockN{Miguel Rossi  Seabra (200604224)}
+\IEEEauthorblockA{\textit{Departamento de Engenharia Informática} \\
+\textit{Faculdade de Engenharia da Universidade do Porto}\\
+Porto, Portugal \\
+ei06054@fe.up.pt}
+}
+
+
+\maketitle
+
+\begin{abstract}
+Aprendizagem supervisionada e seus algoritmos, que são uma componente importante da inteligência artificial, sendo que os mesmo serão utilizados para o reconhecimento de atividade em pessoas idosas.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Inteligência Artificial, Aprendizagem Supervisionada, Python
+\end{IEEEkeywords}
+
+\section{Introdução}
+Neste trabalho utilizar-se-ão diversos métodos de aprendizagem supervisionada para o reconhecimento de atividade em pessoas idosas. 
+Começar-se-á por explorar alguns estudos relacionado com este tema e as suas abordagens, sendo que posteriormente é discutido o trabalho que será desenvolvido, dos diferentes algoritmos que serão implementados em Python e que tipo de análise será realizada à qualidade da aprendizagem.
+ 
+
+\section{Descrição do Tema}
+
+\section{Trabalho Relacionado}
+Existem vários estudos \cite{b1} \cite{b2} \cite{b3} \cite{b4}, com várias abordagens que utilizam inteligência artificial por forma a classificar atividades humanas em tempo real.
+Um dos estudos \cite{b1} centra-se na classificação da saída da cama do paciente. Os algoritmos utilizados centram-se na modelação de uma sequência de primeira ordem “Markov Chain”.
+Num outro estudo \cite{b2} o objetivo era classificar a saída e da cadeira pelo paciente em tempo real. Este baseia-se na modelação probabilística de sequencias lineares “conditional random fields” (CRF).
+À semelhança do estudo referido anteriormente \cite{b2}, um outro estudo \cite{b3} também utilizou CRFs mas utilizando técnicas de “sliding window”.
+O algoritmo CRF é igualmente utilizado num outro estudo. \cite{b4}
+
+
+\section{Trabalho Desenvolvido}
+O programa a desenvolver utilizará, pelo menos, 3 algoritmos de aprendizagem supervisionada (C4.5, Redes Neuronais, K-Nearest Neighbor, Support Vector Machines,...). O conjunto de dados para realização (treino/teste) da aprendizagem supervisionada está disponível num repositório dedicado a “Machine Learning” \cite{b5}.
+A aplicação dos diferentes algoritmos será baseada principalmente nos algoritmos disponíveis no livro da cadeira de Inteligência Artificial \cite{b6}, e no código disponibilizado para acompanha o livro \cite{b7}.
+Para além da aplicação dos diferentes algoritmos de aprendizagem, estes serão comparados de acordo com o seu desempenho. Será dado ênfase à análise da qualidade da aprendizagem (erros obtidos, análise da matriz de confusão, accuracy, ...) e tempo médio despendido para obter a solução.
+A aplicação dos métodos de aprendizagem supervisionada incluirá a realização dos seguintes procedimentos: 
+
+\begin{itemize}
+	\item Análise do conjunto de dados de forma a verificar a eventual necessidade de pré-processamento.
+	\item Identificação do(s) conceito(s) a aprender (variável(is) dependente(s)).
+	\item Definição do conjunto treino e conjunto de teste. 
+	\item Parametrização do modelo/algoritmo de aprendizagem.
+	\item Avaliação da aprendizagem obtida, por medição dos resultados nos conjuntos de treino e teste.
+
+\end{itemize}
+
+
+\section{Resultados Obtidos}
+
+
+
+\section{Conclusões}
+
+Através da implementação e aplicação dos diversos algoritmos de Aprendizagem Supervisionada, pretendemos “aprender” diferentes padrões na atividade de pessoas idosas, sendo que os dados têm como origem um repositório já existente \cite{b5}. 
+Será também feita uma análise aos resultados obtidos pelos algoritmos de aprendizagem e com base nessa análise, os mesmos serão comparados quanto à sua qualidade e à sua adequação à situação e aos dados utilizados.  
+
+
+\section*{Referencias}
+
+
+\begin{thebibliography}{00}
+\bibitem{b1} A. Wickramasinghe, D. C. Ranasinghe, C. Fumeaux e K. D. Hill, “Sequence Learning with Passive RFID Sensors for Real-Time Bed-Egress Recognition,” IEEE Journal of Biomedical and Health Informatics, pp. 917-929, July 2017.
+\bibitem{b2} R. L. S. Torres, R. Visvanathan, S. Hoskins, A. van den Hengel e D. C. Ranasinghe, “Effectiveness of a Batteryless and Wireless Wearable Sensor System for Identifying Bed and Chair Exits in Healthy Older People,” Sensors, nº 16, p. 546, 2016. 
+\bibitem{b3}R. L. S. Torres, D. C. Ranasinghe e Q. Shi, “Evaluation of Wearable Sensor Tag Data Segmentation Approaches for Real Time Activity Classification in Elderly,” MOBIQUITOUS 2013, LNICST 131, pp. 384-395, 2014. 
+\bibitem{b4} L. S. R. Torres, D. C. Ranasinghe, Q. Shi e A. P. Sample, “Sensor Enabled Wearable RFID Technology for Mitigating the Risk of Falls Near Beds,” em IEEE International Conference on RFID, 2013. 
+\bibitem{b5} “UCI Machine Learning Repository: Activity recognition with healthy older people using a batteryless wearable sensor Data Set,” [Online]. Available: http://archive.ics.uci.edu/ml/datasets/Activity+recognition+with+heal\-thy+older+people+using+a+batteryless+wearable+sensor. [Acedido em Maio 2019].
+\bibitem{b6} S. Russel e P. Norvig, Artificial Intelligence: A Modern Approach, Pearson Education Inc., 2010.
+\bibitem{b7} S. Russel e P. Norvig, “AimaCode - Code for the Book Artificial Inteligence: A Modern Approach",” 2019. [Online]. Available: https://github.com/aimacode. [Acedido em Maio 2019].
+
+
+
+
+
+
+
+
+\end{thebibliography}
+
+\end{document}
