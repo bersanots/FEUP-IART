@@ -135,6 +135,15 @@ class Neural_Network(object):
         self.backward(input,act_output,o)
 
     
+window_list = []
+file_list = []
+test_files = []
+training_window = []
+training_inputs = None
+training_outputs = None
+test_window = []
+arguments = {'window' : 5, 'hnodes' : 8, 'rate':0.03, 'sample':0.75, 'iterations':1000}
+
 
 '''
 Column 1: Time in seconds 
@@ -149,19 +158,18 @@ Column 9: Label of activity, 1: sit on bed, 2: sit on chair, 3: lying, 4: ambula
 In addition, gender of participant is included in the last character of file name eg: d1p33F (F:female).
 '''
 def read_data_sets():
-    window_list = []
     file_list = glob.glob(arguments['path'] + 'd?p[0-9]*[MF]')
     #print("files",file_list)
-    test_files = random.sample(file_list,k=int(len(file_list)*2/3))
+    #test_files = random.sample(file_list,k=int(len(file_list)*2/3))
 
-    for file in test_files:
+    for file in file_list:
         with open(file, newline='') as csvfile:
             reader = csv.reader(csvfile,delimiter=',')
             time_slot = 0
             win = Window()
             for row in reader:
                 if len(row) == 9:
-                #inputs = row[1:-1] # copiar tudo menos o ultimo que e' o output e o tempo
+                    
                     gender = file[-1:]
                     g = 1
                     if gender != 'M':
@@ -200,17 +208,12 @@ def read_data_sets():
                     #print('expected_output',row[8])
 
             window_list.append(win)
-                    
-    return window_list
+    
+    random.shuffle(window_list)
 
 #pp = pprint.PrettyPrinter(indent=4)
 #pp.pprint(file_list)
 
-file_list = []
-test_files = []
-training_inputs = None
-training_outputs = None
-arguments = {'window' : 5, 'hnodes' : 8, 'rate':0.03, 'sample':0.75, 'iterations':1000}
 
 neural_net = Neural_Network()
 
@@ -227,10 +230,14 @@ if len(sys.argv) > 1:
         print('ERROR no path to dataset specified')
     else:
         #set defaults
-        window_list = read_data_sets()
+        read_data_sets()
+        sample = int(len(window_list)*arguments["sample"])
+        training_window.extend( window_list[:sample])
+        test_window.extend( window_list[sample:])
+
         arr_i = []
         arr_o = []
-        for w in window_list:
+        for w in training_window:
             w.filter_lines()
             arr_i.append(w.get_median_inputs())
             arr_o.append(w.get_median_output())
@@ -260,8 +267,26 @@ else:
 
 for i in range(int(arguments['iterations'])):
     neural_net.train(training_inputs,training_outputs)
-predicted_out = neural_net.forward(training_inputs)
 
-for i in range(len(training_outputs)):
-    print("actual = ", training_outputs[i]," predicted = ",predicted_out[i])
+print("test_window",len(test_window))
+
+arr_i = []
+arr_o = []
+for w in test_window:
+    w.filter_lines()
+    arr_i.append(w.get_median_inputs())
+    arr_o.append(w.get_median_output())
+
+test_input =  numpy.array(arr_i, dtype=float)
+test_output = numpy.array(arr_o, dtype=float)
+
+ #scale
+test_input = test_input /numpy.amax(test_input,axis=0)
+test_output = test_output/10#4 # val max de output
+
+
+predicted_out = neural_net.forward(test_input)
+
+for i in range(len(test_output)):
+    print("actual = ", test_output[i]," predicted = ",predicted_out[i])
 
