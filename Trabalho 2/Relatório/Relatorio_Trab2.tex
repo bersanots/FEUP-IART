@@ -7,12 +7,13 @@
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
+\usepackage{float}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
 
-\title{Aprendizagem Supervisionada em Python: Reconhecimento de atividade em pessoas idosas (Tema C3/ Grupo 31)}
+\title{Aprendizagem Supervisionada com RapidMiner e Python: Reconhecimento de atividade em pessoas idosas (Tema C3/ Grupo 31)}
 
 \author{\IEEEauthorblockN{André Lopes dos Santos (200505634)}
 \IEEEauthorblockA{\textit{Departamento de Engenharia Informática} \\
@@ -37,19 +38,21 @@ ei06054@fe.up.pt}
 \maketitle
 
 \begin{abstract}
-Aprendizagem supervisionada e seus algoritmos, que são uma componente importante da inteligência artificial, sendo que os mesmo serão utilizados para o reconhecimento de atividade em pessoas idosas.
+Aprendizagem supervisionada e seus algoritmos, que são uma componente importante da inteligência artificial. Neste estudo, os algoritmos são usados num determinado conjunto de dados sobre o movimento de idosos com vários sensores. Os algoritmos permitem criar um modelo que nos permite determinar qual a atividade que um idoso está a realizar através dos valores dos sensores.
 \end{abstract}
 
 \begin{IEEEkeywords}
-Inteligência Artificial, Aprendizagem Supervisionada, Python
+Inteligência Artificial, Aprendizagem Supervisionada, Python, RapidMiner
 \end{IEEEkeywords}
 
 \section{Introdução}
 Neste trabalho utilizar-se-ão diversos métodos de aprendizagem supervisionada para o reconhecimento de atividade em pessoas idosas. 
-Começar-se-á por explorar alguns estudos relacionado com este tema e as suas abordagens, sendo que posteriormente é discutido o trabalho que será desenvolvido, dos diferentes algoritmos que serão implementados em Python e que tipo de análise será realizada à qualidade da aprendizagem.
- 
+Para  realizar este estudo, foram implementados diversos algoritmos de aprendizagem supervisionada em RapidMiner (K-Nearest Neighbour, Redes Neuronais e Support Vector Machines) assim como um algoritmo de redes neuronais implementado em Python.
 
-\section{Descrição do Tema}
+Começar-se-á por mencionar alguns trabalhos relacionados já com estes dados. Posteriormente é explicado o trabalho desenvolvido e quais os parâmetro utilizados nos diferentes testes.
+
+No final mostram-se e explicam-se os resultados obtidos, tirando conclusões dos mesmos.
+
 
 \section{Trabalho Relacionado}
 Existem vários estudos \cite{b1} \cite{b2} \cite{b3} \cite{b4}, com várias abordagens que utilizam inteligência artificial por forma a classificar atividades humanas em tempo real.
@@ -60,29 +63,123 @@ O algoritmo CRF é igualmente utilizado num outro estudo. \cite{b4}
 
 
 \section{Trabalho Desenvolvido}
-O programa a desenvolver utilizará, pelo menos, 3 algoritmos de aprendizagem supervisionada (C4.5, Redes Neuronais, K-Nearest Neighbor, Support Vector Machines,...). O conjunto de dados para realização (treino/teste) da aprendizagem supervisionada está disponível num repositório dedicado a “Machine Learning” \cite{b5}.
-A aplicação dos diferentes algoritmos será baseada principalmente nos algoritmos disponíveis no livro da cadeira de Inteligência Artificial \cite{b6}, e no código disponibilizado para acompanha o livro \cite{b7}.
-Para além da aplicação dos diferentes algoritmos de aprendizagem, estes serão comparados de acordo com o seu desempenho. Será dado ênfase à análise da qualidade da aprendizagem (erros obtidos, análise da matriz de confusão, accuracy, ...) e tempo médio despendido para obter a solução.
-A aplicação dos métodos de aprendizagem supervisionada incluirá a realização dos seguintes procedimentos: 
 
+\subsection{Dados Fornecidos}
+Os dados utilizados neste estudo, foram recolhidos de um repositório de Machine Learning \cite{b5}, que tem muitos conjuntos de dados já prontos para se poderem realizar este tipo de estudos. Este repositório tem a vantagem de ter dados muito "limpos" (i.e. sem dados em falta, etc.) comparativamente ao que se encontra em situações reais, pelo que será muito mais simples realizar o pré-processamento dos mesmos.
+
+Os dados estão divididos em 9 colunas sendo cada uma o seguinte (citando da fonte):
 \begin{itemize}
-	\item Análise do conjunto de dados de forma a verificar a eventual necessidade de pré-processamento.
-	\item Identificação do(s) conceito(s) a aprender (variável(is) dependente(s)).
-	\item Definição do conjunto treino e conjunto de teste. 
-	\item Parametrização do modelo/algoritmo de aprendizagem.
-	\item Avaliação da aprendizagem obtida, por medição dos resultados nos conjuntos de treino e teste.
-
+	\item Column 1: Time in seconds;
+	\item Column 2: Acceleration reading in G for frontal axis;
+	\item Column 3: Acceleration reading in G for vertical axis;
+	\item Column 4: Acceleration reading in G for lateral axis;
+	\item Column 5: Id of antenna reading sensor;
+	\item Column 6: Received signal strength indicator (RSSI);
+	\item Column 7: Phase;
+	\item Column 8: Frequency;
+	\item Column 9: Label of activity, 1: sit on bed, 2: sit on chair, 3: lying, 4: ambulating; 
 \end{itemize}
+
+Os dados em si são anónimos, mas cada ficheiro corresponde a uma pessoa diferente, e a última letra do nome do ficheiro corresponderá ao sexo da pessoa em questão, i.e. "d1p33F", como termina com a letra "F", quer dizer que é uma pessoa do sexo feminino.
+
+\subsection{RapidMiner}
+Com o RapidMiner, começou-se por extrair os dados dos diferentes ficheiros, criando duas colunas extras nos dados: uma primeira para identificar a pessoa (através do nome de ficheiro) e a segunda para dizer o sexo da pessoa (extraindo da última letra do nome do ficheiro).
+
+Posteriormente juntaram-se esses dados numa só tabela. Nessa mesma tabela foram retirados algumas colunas que foram consideradas irrelevantes, mais especificamente: Coluna 1: Tempo e Coluna 5: ID da Antena.
+
+Foi escolhido um atributo para servir de "label", que em RapidMiner significa a componente chave que queremos que a aprendizagem consiga prever. No final terá como propósito, através dos outros dados, conseguir prever qual a atividade que uma pessoa está a realizar com base nos outros dados.
+
+Foram Realizados 3 algoritmos de aprendizagem supervisionada: Redes Neuronais, K-Nearest Neighbor e Support Vector Machines. Para cada um deles, foi realizado o método de "Cross-Validation" em que se usaram 5 partições disjuntas (para tornar o procedimento não muito demorado). Na Figura \ref{fig:rapidminer1} pode-se ver uma imagem do "Project" concebido.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\linewidth]{Rapidminer1.png}
+	\caption{Esquema do Projeto RapidMiner Utilizado.}
+	\label{fig:rapidminer1}
+\end{figure}
+
+Para os diferentes métodos os parâmetros foram os seguinte:
+\begin{itemize}
+	\item Para o Método "K-Nearest Neighbor";
+	\begin{itemize}
+		\item K = 5;
+	\end{itemize}
+	\item Para o Método "Support Vector Machines"
+	\begin{itemize}
+		\item Parâmetro C = 0;
+		\item Função Kernel: K(x,y) = x*y;
+		\item Epsilon de convergência: 0,001
+	\end{itemize}
+	\item Para as Redes Neuronais:
+	\begin{itemize}
+		\item Número de ciclos de treino: 200;
+		\item "Learning Rate" (peso adicionado): 0.3;
+	\end{itemize}
+\end{itemize}
+
+Há que enfatizar o facto de que estas Redes Neuronais é do género "Feed-Forward" treinado por um algoritmo de "back propagation" (multi-layer perceptron).
+
+
+\subsection{Rede Neuronal em Python}
+O programa a desenvolvido foi baseado numa implementação encontrada de uma rede neuronal em python \cite{b6}.
+
+Para representar uma Rede Neuronal Artificial em python, foi criada uma classe "Neural\_Network" que tem como atributos o número de nós de entrada na input layer ("n\_inputs"), o número de nós na hidden layer ("hidden\_nodes"), o peso dos nós de entrada ("weight\_input") e o peso dos nós da camada intermédia ("weight\_hnodes").  Esta classe tem os seguintes métodos: a função de ativação para obter o output, representada pela função sigmóide ("sigmoid"), que recebe como argumento um valor ou conjunto de valores; a derivada da função de ativação ("sigmoidPrime") , que recebe como argumento um valor ou conjunto de valores; a função de propagação direta ("forward"), que recebe a matriz de inputs, multiplica-a pelos pesos respetivos, aplica-lhe a função de ativação, multiplica desta vez pelos pesos dos nós intermédios e, por fim, aplica de novo a função de ativação a este último conjunto de valores de forma a obter o output; tem também a função de propagação reversa ("backward"), que recebe a matriz  de inputs, os outputs reais os outputs previstos, calculando as diferenças entre os dois conjuntos de outputs e atualizando os pesos dos nós consoante a magnitude dos erros cometidos; e por fim, a classe tem o método de treino ("train") que recebe os inputs e os outputs reais, aplica a função de propagação direta aos inputs e posteriormente aplica a função de propagação reversa com os inputs , os outputs reais e os valores calculados anteriormente correspondentes ao output previsto.
+
+O programa, após ler e processar os dados de um ficheiro, cria uma nova rede neuronal através da classe criada ("Neural\_Network()") e separa os dados em dados de treino, com os quais vai treinar a rede neuronal, e dados de teste, com os quais vai testar a precisão com que a rede treinada consegue prever os resultados. 
+
+No final, é apresentada uma lista de valores reais comparados com o seu valor previsto pela rede neuronal, além do erro associado a estes cálculos.
 
 
 \section{Resultados Obtidos}
+\subsection{Resultados RapidMiner}
+
+
+\subsection{Resultados da Rede Neuronal em Python}
+
+Utilizado a Rede Neuronal Desenvolvida em Python, obtiveram-se os seguintes resultados sendo que as "Losses" são basicamente o erro entre o output esperado e o valor real.
+
+\begin{table}[htbp]
+\caption{"Training Loss vs Testing Loss" em função do número de iterações}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Iterações} & \textbf{Training Loss} & \textbf{Testing Loss} \\
+\hline
+ 10000 & 0.14255 & 0.02555\\
+ 50000 & 0.11119 & 0.02145\\
+ 100000 & 0.09601 & 0.01953\\
+ 200000 & 0.08662 & 0.01867\\
+ 500000 & 0.07341 & 0.01222\\
+ 1000000 & 0.05612 & 0.00868\\
+\hline
+
+
+\end{tabular}
+\label{tab1}
+\end{center}
+\end{table}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\linewidth]{python1.png}
+	\caption{"Training Loss vs Testing Loss" em função do número de iterações}
+	\label{fig:python1}
+\end{figure}
+
+
+O erro nas previsões dos treinos vai decrescendo mais rapidamente do que nas previsões dos testes à medida que se vão aumentando as iterações.
+Isto acontece pois o algoritmo é melhorado com os treinos, devido à atualização dos pesos dos nós.
+
+Mesmo assim, as perdas nos treinos obviamente continuam a ser maiores que nos testes, pois as previsões de output para os testes já utilizam um algoritmo bastante treinado
 
 
 
 \section{Conclusões}
 
-Através da implementação e aplicação dos diversos algoritmos de Aprendizagem Supervisionada, pretendemos “aprender” diferentes padrões na atividade de pessoas idosas, sendo que os dados têm como origem um repositório já existente \cite{b5}. 
-Será também feita uma análise aos resultados obtidos pelos algoritmos de aprendizagem e com base nessa análise, os mesmos serão comparados quanto à sua qualidade e à sua adequação à situação e aos dados utilizados.  
+Através da implementação e aplicação dos diversos algoritmos de Aprendizagem Supervisionada e dos dados fornecidos \cite{b5}, torna-se possível prever, através dos dados dos sensores, qual a atividade que uma dada pessoa está a realizar.
+
+No caso do algoritmo desenvolvido em python, pode-se verificar que quanto maior for o número de iterações, menor serão os "losses", mostrando assim que o algoritmo aprende mais e consegue ser mais preciso nas suas previsões.
 
 
 \section*{Referencias}
@@ -94,8 +191,7 @@ Será também feita uma análise aos resultados obtidos pelos algoritmos de apre
 \bibitem{b3}R. L. S. Torres, D. C. Ranasinghe e Q. Shi, “Evaluation of Wearable Sensor Tag Data Segmentation Approaches for Real Time Activity Classification in Elderly,” MOBIQUITOUS 2013, LNICST 131, pp. 384-395, 2014. 
 \bibitem{b4} L. S. R. Torres, D. C. Ranasinghe, Q. Shi e A. P. Sample, “Sensor Enabled Wearable RFID Technology for Mitigating the Risk of Falls Near Beds,” em IEEE International Conference on RFID, 2013. 
 \bibitem{b5} “UCI Machine Learning Repository: Activity recognition with healthy older people using a batteryless wearable sensor Data Set,” [Online]. Available: http://archive.ics.uci.edu/ml/datasets/Activity+recognition+with+heal\-thy+older+people+using+a+batteryless+wearable+sensor. [Acedido em Maio 2019].
-\bibitem{b6} S. Russel e P. Norvig, Artificial Intelligence: A Modern Approach, Pearson Education Inc., 2010.
-\bibitem{b7} S. Russel e P. Norvig, “AimaCode - Code for the Book Artificial Inteligence: A Modern Approach",” 2019. [Online]. Available: https://github.com/aimacode. [Acedido em Maio 2019].
+\bibitem{b6} "Build a Neural Network in Python | Enlight" [Online]. Available https://enlight.nyc/projects/neural-network/ [Acedido em Maio 2019]
 
 
 
